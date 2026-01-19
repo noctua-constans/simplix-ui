@@ -1,6 +1,7 @@
-import type { GridRootProps } from "@layouts";
-import { Layout } from "@layouts";
 import type { CSSProperties, ElementType, JSX } from "react";
+
+import type { GridRootProps } from "./grid.types";
+import { Layout } from "../layout";
 
 export function GridRoot<T extends ElementType = "div">(props: GridRootProps<T>): JSX.Element {
     const { as, style, ...rest } = props;

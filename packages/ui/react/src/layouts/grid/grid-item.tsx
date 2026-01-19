@@ -1,6 +1,7 @@
-import type { GridItemProps } from "@layouts";
-import { Layout } from "@layouts";
 import type { CSSProperties, ElementType, JSX } from "react";
+
+import type { GridItemProps } from "./grid.types";
+import { Layout } from "../layout";
 
 export function GridItem<T extends ElementType = "div">(props: GridItemProps<T>): JSX.Element {
     const { as, style, ...rest } = props;

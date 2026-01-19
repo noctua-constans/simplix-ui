@@ -1,5 +1,6 @@
-import type { ComponentWithChildren, ComponentWithStyles } from "@types";
 import type { ButtonHTMLAttributes } from "react";
+
+import type { ComponentWithChildren, ComponentWithStyles } from "../../types";
 
 export type ButtonProps = ComponentWithChildren &
     ComponentWithStyles &

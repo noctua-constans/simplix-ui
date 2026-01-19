@@ -1,4 +1,4 @@
-import type { ComponentWithChildren, ComponentWithStyles } from "@types";
+import type { ComponentWithChildren, ComponentWithStyles } from "../../../types";
 
 export type BlockquoteProps = {
     cite?: string | undefined;

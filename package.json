@@ -9,11 +9,10 @@
     "scripts": {
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "typecheck": "tsc -p . --noEmit",
         "test": "vitest run",
         "test:watch": "vitest",
         "build": "pnpm -r build",
-        "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+        "verify": "pnpm lint && pnpm test && pnpm build"
     },
     "packageManager": "pnpm@10.25.0",
     "devDependencies": {

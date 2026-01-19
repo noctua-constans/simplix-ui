@@ -1,5 +1,6 @@
-import type { PolymorphicComponentWithRef } from "@types";
 import type { CSSProperties, ElementType } from "react";
+
+import type { PolymorphicComponentWithRef } from "../../types";
 
 export type LayoutProps<T extends ElementType> = PolymorphicComponentWithRef<
     T,

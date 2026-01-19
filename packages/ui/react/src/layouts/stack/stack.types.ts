@@ -1,6 +1,6 @@
-import type { PolymorphicComponentWithRef } from "@types";
 import type { ElementType } from "react";
 
+import type { PolymorphicComponentWithRef } from "../../types";
 import type { FlexProps } from "../flex";
 
 export type StackDirection = "vertical" | "horizontal";
