@@ -9,12 +9,15 @@ export class _StatelessMachineImpl<S extends string, E extends StateEventOf> imp
 
     resolve<T extends E["type"]>(state: S, event: Extract<E, { type: T }>): S | null {
         const transition = this.#transitions[state]?.[event.type];
-
-        if (this.can(state, event)) {
-            return transition?.target ?? null;
+        if (!transition) {
+            return null;
         }
 
-        return null;
+        if (transition.guard && !transition.guard({ state, event })) {
+            return null;
+        }
+
+        return transition.target;
     }
 
     can<T extends E["type"]>(state: S, event: Extract<E, { type: T }>): boolean {

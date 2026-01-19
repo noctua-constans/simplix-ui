@@ -1,4 +1,4 @@
-import type { Configurable, Readable, Subscribable, Syncable } from "@types";
+import type { Configurable, Readable, Subscribable, Syncable } from "../types";
 
 export type ControlModelCompileOptions<T> = { value: T; defaultValue?: never } | { value?: never; defaultValue: T };
 

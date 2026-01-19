@@ -5,16 +5,16 @@
     "license": "MIT",
     "type": "module",
     "author": {
-        "name": "Deffick",
-        "url": "https://github.com/d9ff1ck"
+        "name": "Noctua Constans",
+        "url": "https://github.com/noctua-constans"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/d9ff1ck/simplix-ui.git"
+        "url": "https://github.com/noctua-constans/simplix-ui.git"
     },
-    "homepage": "https://github.com/d9ff1ck/simplix-ui",
+    "homepage": "https://github.com/noctua-constans/simplix-ui",
     "bugs": {
-        "url": "https://github.com/d9ff1ck/simplix-ui/issues"
+        "url": "https://github.com/noctua-constans/simplix-ui/issues"
     },
     "main": "./dist/index.cjs",
     "module": "./dist/index.js",
