@@ -66,15 +66,10 @@ export default [
             "react/react-in-jsx-scope": "off",
             "react/jsx-uses-vars": "error",
 
-            "prettier/prettier": "warn",
+            "prettier/prettier": "error",
         },
     },
-
     {
-        files: ["**/*.{ts,tsx,js,jsx}"],
-    },
-
-    {
-        ignores: ["dist", "node_modules", "*.d.ts", "apps/docs/.vitepress"],
+        ignores: ["**/dist/**", "**/node_modules/**", "**/*.d.ts"],
     },
 ];
