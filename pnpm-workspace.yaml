@@ -1,0 +1,7 @@
+packages:
+  - packages/core
+  - packages/headless
+  - packages/ui/*
+
+onlyBuiltDependencies:
+  - esbuild

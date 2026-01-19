@@ -1,0 +1,16 @@
+{
+    "extends": "../../.config/tsconfig.library.json",
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "@components": ["components/index"],
+            "@internal": ["internal/index"],
+            "@layouts": ["layouts/index"],
+            "@types": ["types/index"]
+        },
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "jsx": "react-jsx"
+    },
+    "include": ["src"]
+}

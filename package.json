@@ -1,6 +1,11 @@
 {
     "name": "simplix-repo",
     "private": true,
+    "workspaces": [
+        "packages/core",
+        "packages/headless",
+        "packages/ui/*"
+    ],
     "devDependencies": {
         "@eslint/js": "^9.39.1",
         "@types/react": "^19.2",
