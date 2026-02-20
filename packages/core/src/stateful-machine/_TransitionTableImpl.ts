@@ -1,9 +1,9 @@
-import type { StateEventOf, StatelessMachine, StatelessMachineOptions, Transitions } from "./stateless-machine.types";
+import type { StateEventOf, Transitions, TransitionTable, TransitionTableOptions } from "./stateful-machine.types";
 
-export class _StatelessMachineImpl<S extends string, E extends StateEventOf> implements StatelessMachine<S, E> {
+export class _TransitionTableImpl<S extends string, E extends StateEventOf> implements TransitionTable<S, E> {
     readonly #transitions: Transitions<S, E>;
 
-    constructor(options: StatelessMachineOptions<S, E>) {
+    constructor(options: TransitionTableOptions<S, E>) {
         this.#transitions = options.transitions;
     }
 

@@ -51,6 +51,5 @@ export function GridRoot<T extends ElementType = "div">(props: GridRootProps<T>)
 
         ...style,
     };
-
     return <Layout as={Tag} style={inlineStyles} {...others} />;
 }

@@ -1,3 +1,3 @@
 export * from "./types";
-export * from "./control-model";
-export * from "./stateless-machine";
+export * from "./stateful-machine";
+export * from "./store";

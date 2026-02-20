@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from "react";
 
-import type { ComponentWithStyles } from "../../types";
+import type { ComponentWithStyles, MergeProps } from "../../types";
 
-export type DividerProps = ComponentWithStyles & Omit<HTMLAttributes<HTMLHRElement>, keyof ComponentWithStyles>;
+export type DividerProps = MergeProps<ComponentWithStyles, HTMLAttributes<HTMLHRElement>>;

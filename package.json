@@ -10,9 +10,10 @@
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "test": "vitest run",
-        "test:watch": "vitest",
         "build": "pnpm -r build",
-        "verify": "pnpm lint && pnpm test && pnpm build"
+        "clean": "pnpm -r clean",
+        "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+        "typecheck": "pnpm -r typecheck"
     },
     "packageManager": "pnpm@10.25.0",
     "devDependencies": {
