@@ -1,3 +1,7 @@
+export type Listener = () => void;
+
+export type Unsubscribe = () => void;
+
 export interface Subscribable {
-    subscribe(listener: () => void): () => void;
+    subscribe(listener: Listener): Unsubscribe;
 }

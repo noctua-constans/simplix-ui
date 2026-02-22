@@ -1,37 +1,42 @@
 import { createTransitionTable, type TransitionTable } from "@simplix/core";
 
-import type { DropdownMachineEvent, DropdownMachineState } from "./dropdown.machine.types";
+import type { DropdownMachineEvent, DropdownMachineState, DropdownMachineContext } from "./dropdown.machine.types";
 
-export const DropdownTransitions: TransitionTable<DropdownMachineState, DropdownMachineEvent> = createTransitionTable({
-    transitions: {
-        open: {
-            CLOSE: {
-                target: "closed",
+export const DropdownTransitions: TransitionTable<DropdownMachineState, DropdownMachineContext, DropdownMachineEvent> =
+    createTransitionTable({
+        transitions: {
+            open: {
+                CLOSE: {
+                    target: "closed",
+                },
+                TOGGLE: {
+                    target: "closed",
+                },
+                DISABLE: {
+                    target: "closed",
+                    reduce: ({ context }) => ({ ...context, disabled: true }),
+                },
+                ENABLE: {
+                    target: "closed",
+                    reduce: ({ context }) => ({ ...context, disabled: false }),
+                },
             },
-            TOGGLE: {
-                target: "closed",
-            },
-            DISABLE: {
-                target: "disabled",
+
+            closed: {
+                OPEN: {
+                    target: "open",
+                    guard: ({ context }) => !context.disabled,
+                },
+                TOGGLE: {
+                    target: "open",
+                    guard: ({ context }) => !context.disabled,
+                },
+                DISABLE: {
+                    reduce: ({ context }) => ({ ...context, disabled: true }),
+                },
+                ENABLE: {
+                    reduce: ({ context }) => ({ ...context, disabled: false }),
+                },
             },
         },
-
-        closed: {
-            OPEN: {
-                target: "open",
-            },
-            TOGGLE: {
-                target: "open",
-            },
-            DISABLE: {
-                target: "disabled",
-            },
-        },
-
-        disabled: {
-            ENABLE: {
-                target: "closed",
-            },
-        },
-    },
-});
+    });

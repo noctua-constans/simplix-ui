@@ -1,32 +1,45 @@
-import type { StateEventOf, StatefulMachine, StatefulMachineOptions, TransitionTable } from "./stateful-machine.types";
-import { type Store, createStore } from "../store";
+import type { TransitionTable } from "../transition-table";
+import type { StateEventOf } from "../types";
+import type { StatefulMachineOptions, StatefulMachine, MachineSnapshot } from "./stateful-machine.types";
+import { type WritableStore, createWritableStore } from "../writable-store";
 
-export class _StatefulMachineImpl<S extends string, E extends StateEventOf> implements StatefulMachine<S, E> {
-    #store: Store<S>;
-    readonly #table: TransitionTable<S, E>;
+export class _StatefulMachineImpl<S extends string, C, E extends StateEventOf> implements StatefulMachine<S, C, E> {
+    #store: WritableStore<MachineSnapshot<S, C>>;
+    readonly #table: TransitionTable<S, C, E>;
 
-    constructor(options: StatefulMachineOptions<S, E>) {
-        this.#store = createStore(options.initialState);
+    constructor(options: StatefulMachineOptions<S, C, E>) {
+        this.#store = createWritableStore({ state: options.initialState, context: options.context });
         this.#table = options.table;
     }
 
-    get(): S {
+    get(): MachineSnapshot<S, C> {
         return this.#store.get();
     }
 
     send<T extends E["type"]>(event: Extract<E, { type: T }>): void {
         const current = this.#store.get();
-        const next = this.#table.resolve(current, event);
 
-        if (next === null || current === next) {
+        const transition = this.#table.resolve(current.state, current.context, event);
+
+        if (!transition) {
             return;
         }
 
-        this.#store.set(next);
+        const next = transition.target ?? current.state;
+        const context = transition.reduce
+            ? transition.reduce({ state: current.state, context: current.context, event })
+            : current.context;
+
+        if (next === current.state && Object.is(context, current.context)) {
+            return;
+        }
+
+        this.#store.set({ state: next, context });
     }
 
     can<T extends E["type"]>(event: Extract<E, { type: T }>): boolean {
-        return this.#table.can(this.#store.get(), event);
+        const current = this.#store.get();
+        return this.#table.can(current.state, current.context, event);
     }
 
     subscribe(listener: () => void): () => void {

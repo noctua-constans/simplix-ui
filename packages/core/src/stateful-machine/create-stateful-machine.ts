@@ -1,8 +1,9 @@
 import { _StatefulMachineImpl } from "./_StatefulMachineImpl";
-import type { StateEventOf, StatefulMachine, StatefulMachineOptions } from "./stateful-machine.types";
+import type { StatefulMachine, StatefulMachineOptions } from "./stateful-machine.types";
+import type { StateEventOf } from "../types";
 
-export function createStatefulMachine<S extends string, E extends StateEventOf>(
-    options: StatefulMachineOptions<S, E>,
-): StatefulMachine<S, E> {
+export function createStatefulMachine<S extends string, C, E extends StateEventOf>(
+    options: StatefulMachineOptions<S, C, E>,
+): StatefulMachine<S, C, E> {
     return new _StatefulMachineImpl(options);
 }

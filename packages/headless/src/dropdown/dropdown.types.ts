@@ -5,6 +5,11 @@ export type DropdownSnapshot = Readonly<{
     disabled: boolean;
 }>;
 
+export type DropdownControllerOptions = {
+    defaultOpen?: boolean;
+    disabled?: boolean;
+};
+
 export interface DropdownController extends HeadlessController<DropdownSnapshot> {
     open(): void;
     close(): void;

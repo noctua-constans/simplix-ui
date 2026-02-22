@@ -2,6 +2,7 @@
     "name": "simplix-repo",
     "private": true,
     "workspaces": [
+        "applications/playground",
         "packages/core",
         "packages/headless",
         "packages/ui/*"

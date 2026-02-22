@@ -1,11 +1,9 @@
-import { createStatefulMachine, type StatefulMachine } from "@simplix/core";
+import { createStatefulMachine, type StatefulMachine, type StatefulMachineOptions } from "@simplix/core";
 
-import type { DropdownMachineEvent, DropdownMachineState } from "./dropdown.machine.types";
-import { DropdownTransitions } from "./dropdown.transitions";
+import type { DropdownMachineEvent, DropdownMachineState, DropdownMachineContext } from "./dropdown.machine.types";
 
-export function createDropdownMachine(): StatefulMachine<DropdownMachineState, DropdownMachineEvent> {
-    return createStatefulMachine({
-        initialState: "closed",
-        table: DropdownTransitions,
-    });
+export function createDropdownMachine(
+    options: StatefulMachineOptions<DropdownMachineState, DropdownMachineContext, DropdownMachineEvent>,
+): StatefulMachine<DropdownMachineState, DropdownMachineContext, DropdownMachineEvent> {
+    return createStatefulMachine(options);
 }

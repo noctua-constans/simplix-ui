@@ -1,11 +1,12 @@
-import type { Store, StoreOptions, Equality } from "./store.types";
+import type { WritableStore, WritableStoreOptions, Equality } from "./writable-store.types";
+import type { Listener, Unsubscribe } from "../types";
 
-export class _StoreImpl<T> implements Store<T> {
+export class _WrirableStoreImpl<T> implements WritableStore<T> {
     #internal: T;
-    readonly #listeners: Set<() => void>;
+    readonly #listeners: Set<Listener>;
     readonly #equals: Equality<T>;
 
-    constructor(initial: T, options?: StoreOptions<T>) {
+    constructor(initial: T, options?: WritableStoreOptions<T>) {
         this.#internal = initial;
         this.#listeners = new Set();
         this.#equals = options?.equals ?? Object.is;
@@ -28,7 +29,7 @@ export class _StoreImpl<T> implements Store<T> {
         this.set(next);
     }
 
-    subscribe(listener: () => void): () => void {
+    subscribe(listener: () => void): Unsubscribe {
         this.#listeners.add(listener);
 
         return () => {

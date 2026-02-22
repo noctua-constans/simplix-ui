@@ -1,0 +1,28 @@
+{
+  "extends": "../../packages/.config/tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      "@simplix/core": ["../../packages/core/src/index.ts"],
+      "@simplix/headless": ["../../packages/headless/src/index.ts"],
+      "@simplix/react": ["../../packages/ui/react/src/index.ts"]
+    },
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "declaration": false,
+    "declarationMap": false,
+    "emitDeclarationOnly": false,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}

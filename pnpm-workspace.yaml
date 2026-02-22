@@ -1,4 +1,5 @@
 packages:
+  - applications/playground
   - packages/core
   - packages/headless
   - packages/ui/*

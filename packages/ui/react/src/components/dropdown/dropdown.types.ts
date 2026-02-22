@@ -5,23 +5,19 @@ import type { ComponentWithChildren, ComponentWithStyles, MergeProps } from "../
 export type DropdownContextValue = {
     open: boolean;
     setOpen: (open: boolean) => void;
-    onChoose: () => void;
     disabled: boolean;
 };
 
 export type DropdownRootProps = {
     open?: boolean;
     defaultOpen?: boolean;
-    setOpen?: (open: boolean) => void;
+    onOpenChange?: (open: boolean) => void;
     disabled?: boolean;
 } & ComponentWithChildren;
 
 export type DropdownTriggerProps = MergeProps<
-    {
-        onTrigger?: () => void;
-    } & ComponentWithChildren &
-        ComponentWithStyles,
-    ButtonHTMLAttributes<HTMLButtonElement>
+    ComponentWithChildren & ComponentWithStyles,
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, "disabled">
 >;
 
 export type DropdownMenuProps = MergeProps<

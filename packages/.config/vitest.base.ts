@@ -5,7 +5,7 @@ export function createVitestConfig() {
         test: {
             coverage: {
                 provider: "v8",
-                exclude: ["**/index.ts", "src/types/**"],
+                exclude: ["**/index.ts", "**.types.ts"],
             },
             environment: "node",
             include: ["test/**/*.test.ts"],

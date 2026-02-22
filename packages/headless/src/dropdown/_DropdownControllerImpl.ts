@@ -1,16 +1,27 @@
-import { type StatefulMachine, type Store, createStore } from "@simplix/core";
+import {
+    type StatefulMachine,
+    type Listener,
+    type Unsubscribe,
+    type WritableStore,
+    createWritableStore,
+} from "@simplix/core";
 
-import type { DropdownController, DropdownSnapshot } from "./dropdown.types";
-import { type DropdownMachineState, type DropdownMachineEvent, createDropdownMachine } from "./machine";
+import type { DropdownController, DropdownSnapshot, DropdownControllerOptions } from "./dropdown.types";
+import { DropdownSnapshotEquals, normalizeToMachineOptions } from "./dropdown.utils";
+import {
+    type DropdownMachineState,
+    type DropdownMachineEvent,
+    createDropdownMachine,
+    type DropdownMachineContext,
+} from "./machine";
 
 export class _DropdownControllerImpl implements DropdownController {
-    readonly #machine: StatefulMachine<DropdownMachineState, DropdownMachineEvent>;
-    readonly #store: Store<DropdownSnapshot>;
+    readonly #machine: StatefulMachine<DropdownMachineState, DropdownMachineContext, DropdownMachineEvent>;
+    readonly #store: WritableStore<DropdownSnapshot>;
 
-    constructor() {
-        this.#machine = createDropdownMachine();
-
-        this.#store = createStore(this.#buildSnapshot());
+    constructor(options: DropdownControllerOptions) {
+        this.#machine = createDropdownMachine(normalizeToMachineOptions(options));
+        this.#store = createWritableStore(this.#buildSnapshot(), { equals: DropdownSnapshotEquals });
         this.#machine.subscribe(() => {
             this.#store.set(this.#buildSnapshot());
         });
@@ -40,15 +51,16 @@ export class _DropdownControllerImpl implements DropdownController {
         this.#machine.send({ type: "ENABLE" });
     }
 
-    subscribe(listener: () => void): () => void {
+    subscribe(listener: Listener): Unsubscribe {
         return this.#store.subscribe(listener);
     }
 
     #buildSnapshot(): DropdownSnapshot {
-        const state = this.#machine.get();
+        const snapshot = this.#machine.get();
+
         return {
-            open: state === "open",
-            disabled: state === "disabled",
+            open: snapshot.state === "open",
+            disabled: snapshot.context.disabled,
         };
     }
 }
