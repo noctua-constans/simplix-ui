@@ -2,19 +2,19 @@
     "name": "simplix-repo",
     "private": true,
     "workspaces": [
-        "applications/playground",
         "packages/core",
         "packages/headless",
-        "packages/ui/*"
+        "packages/dom",
+        "packages/react"
     ],
     "scripts": {
+        "typecheck": "pnpm -r typecheck",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "test": "vitest run",
+        "test": "pnpm -r test",
         "build": "pnpm -r build",
         "clean": "pnpm -r clean",
-        "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
-        "typecheck": "pnpm -r typecheck"
+        "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
     },
     "packageManager": "pnpm@10.25.0",
     "devDependencies": {

@@ -107,4 +107,4 @@ Contribution guidelines are available in **[CONTRIBUTING.md](./CONTRIBUTING.md)*
 ---
 
 ## LICENSE
-**[MIT License](./LICENSE)**
+**[Apache 2.0 License](./LICENSE)**

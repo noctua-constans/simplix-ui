@@ -1,5 +1,5 @@
 {
-    "name": "@simplix/headless",
+    "name": "@simplix/react",
     "version": "0.1.0",
     "description": "A modular, type-safe foundation for Simplix UI. Headless logic, utilities, and shared primitives for building consistent UI components.",
     "license": "Apache-2.0",
@@ -33,7 +33,7 @@
         "NOTICE"
     ],
     "dependencies": {
-        "@simplix/core": "workspace:^"
+        "@simplix/headless": "workspace:^"
     },
     "engines": {
         "node": ">=20",

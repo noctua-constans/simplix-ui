@@ -9,5 +9,5 @@
         "outDir": "./dist",
         "types": ["./src/environment"]
     },
-    "include": ["src", "test"]
+    "include": ["src"]
 }

@@ -1,5 +1,5 @@
 {
-    "name": "@simplix/headless",
+    "name": "@simplix/dom",
     "version": "0.1.0",
     "description": "A modular, type-safe foundation for Simplix UI. Headless logic, utilities, and shared primitives for building consistent UI components.",
     "license": "Apache-2.0",
@@ -32,9 +32,6 @@
         "LICENSE",
         "NOTICE"
     ],
-    "dependencies": {
-        "@simplix/core": "workspace:^"
-    },
     "engines": {
         "node": ">=20",
         "pnpm": ">=10"
@@ -43,10 +40,14 @@
         "build": "tsup",
         "clean": "rm -rf dist",
         "test": "vitest run",
-        "test:coverage": "vitest run --coverage --coverage.reporter=text",
-        "typecheck:src": "tsc -p tsconfig.json --noEmit",
-        "typecheck:test": "tsc -p test/tsconfig.json --noEmit",
-        "typecheck": "pnpm run typecheck:src && pnpm run typecheck:test"
+        "test:coverage": "vitest run --coverage --coverage.reporter=text"
     },
-    "packageManager": "pnpm@10.25.0"
+    "packageManager": "pnpm@10.25.0",
+    "dependencies": {
+        "@simplix/headless": "workspace:^"
+    },
+    "devDependencies": {
+        "vite-tsconfig-paths": "^6.1.1",
+        "vitest": "^4.0.17"
+    }
 }

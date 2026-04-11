@@ -2,7 +2,7 @@
     "name": "@simplix/core",
     "version": "0.1.0",
     "description": "A modular, type-safe foundation for Simplix UI. Headless logic, utilities, and shared primitives for building consistent UI components.",
-    "license": "MIT",
+    "license": "Apache-2.0",
     "type": "module",
     "author": {
         "name": "Noctua Constans",
@@ -29,7 +29,8 @@
     "files": [
         "dist",
         "README.md",
-        "LICENSE"
+        "LICENSE",
+        "NOTICE"
     ],
     "engines": {
         "node": ">=20",
@@ -39,32 +40,11 @@
         "build": "tsup",
         "clean": "rm -rf dist",
         "test": "vitest run",
-        "test:coverage": "vitest run --coverage --coverage.reporter=text",
-        "typecheck:src": "tsc -p tsconfig.json --noEmit",
-        "typecheck:test": "tsc -p test/tsconfig.json --noEmit",
-        "typecheck": "pnpm run typecheck:src && pnpm run typecheck:test"
+        "test:coverage": "vitest run --coverage --coverage.reporter=text"
     },
-    "keywords": [
-        "react",
-        "react-ui",
-        "react-components",
-        "ui-library",
-        "design-system",
-        "component-library",
-        "typescript",
-        "headless",
-        "headless-ui",
-        "atomic-design",
-        "ui-constructor",
-        "tokens",
-        "theming",
-        "css-agnostic",
-        "unopinionated",
-        "rslx",
-        "simplix"
-    ],
     "packageManager": "pnpm@10.25.0",
     "devDependencies": {
+        "vite-tsconfig-paths": "^6.1.1",
         "vitest": "^4.0.17"
     }
 }

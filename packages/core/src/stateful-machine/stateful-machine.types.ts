@@ -1,5 +1,5 @@
-import type { TransitionTable } from "../transition-table";
-import type { Readable, Subscribable, StateEventOf } from "../types";
+import type { TransitionTable } from "@/transition-table";
+import type { Readable, Subscribable, StateEventOf } from "@/types";
 
 export type MachineSnapshot<S extends string, C> = {
     state: S;

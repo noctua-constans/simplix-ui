@@ -1,8 +1,8 @@
 packages:
-  - applications/playground
   - packages/core
   - packages/headless
-  - packages/ui/*
+  - packages/dom
+  - packages/react
 
 onlyBuiltDependencies:
   - esbuild

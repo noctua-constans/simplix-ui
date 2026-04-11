@@ -1,4 +1,4 @@
-import type { StateEventOf } from "../types";
+import type { StateEventOf } from "@/types";
 
 export type Guard<From extends string, C, Ev extends StateEventOf> = (options: {
     state: From;

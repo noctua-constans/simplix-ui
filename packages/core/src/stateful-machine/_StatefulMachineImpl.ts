@@ -1,14 +1,15 @@
-import type { TransitionTable } from "../transition-table";
-import type { StateEventOf } from "../types";
 import type { StatefulMachineOptions, StatefulMachine, MachineSnapshot } from "./stateful-machine.types";
-import { type WritableStore, createWritableStore } from "../writable-store";
+
+import { type MutableState, createMutableState } from "@/mutable-state";
+import type { TransitionTable } from "@/transition-table";
+import type { StateEventOf } from "@/types";
 
 export class _StatefulMachineImpl<S extends string, C, E extends StateEventOf> implements StatefulMachine<S, C, E> {
-    #store: WritableStore<MachineSnapshot<S, C>>;
+    #store: MutableState<MachineSnapshot<S, C>>;
     readonly #table: TransitionTable<S, C, E>;
 
     constructor(options: StatefulMachineOptions<S, C, E>) {
-        this.#store = createWritableStore({ state: options.initialState, context: options.context });
+        this.#store = createMutableState({ state: options.initialState, context: options.context });
         this.#table = options.table;
     }
 
