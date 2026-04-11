@@ -1,8 +1,8 @@
-export type DomEventListenerDisposer = () => void;
-
 export type DomEventOf<TEventMap extends object, TKey extends keyof TEventMap> = TEventMap[TKey] & Event;
 
-export interface DomEventListener<
+export type EventListenerDisposer = () => void;
+
+export interface EventListener<
     TTarget extends EventTarget = EventTarget,
     TEventMap extends object = GlobalEventHandlersEventMap,
 > {
@@ -11,5 +11,5 @@ export interface DomEventListener<
         type: TKey,
         listener: (event: DomEventOf<TEventMap, TKey>) => void,
         options?: AddEventListenerOptions,
-    ): DomEventListenerDisposer;
+    ): EventListenerDisposer;
 }

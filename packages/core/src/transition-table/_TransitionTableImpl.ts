@@ -1,5 +1,4 @@
-import type { Transitions, TransitionTableOptions, TransitionTable, Transition } from "./transition-table.types";
-
+import type { Transitions, TransitionTableOptions, TransitionTable, Transition } from "@/transition-table";
 import type { StateEventOf } from "@/types";
 
 export class _TransitionTableImpl<S extends string, C, E extends StateEventOf> implements TransitionTable<S, C, E> {

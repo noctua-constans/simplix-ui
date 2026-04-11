@@ -1,6 +1,5 @@
-import type { StatefulMachineOptions, StatefulMachine, MachineSnapshot } from "./stateful-machine.types";
-
 import { type MutableState, createMutableState } from "@/mutable-state";
+import type { StatefulMachineOptions, StatefulMachine, MachineSnapshot } from "@/stateful-machine";
 import type { TransitionTable } from "@/transition-table";
 import type { StateEventOf } from "@/types";
 

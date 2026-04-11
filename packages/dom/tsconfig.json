@@ -6,8 +6,7 @@
             "@/*": ["src/*"]
         },
         "rootDir": "./src",
-        "outDir": "./dist",
-        "types": ["./src/environment"]
+        "outDir": "./dist"
     },
     "include": ["src"]
 }

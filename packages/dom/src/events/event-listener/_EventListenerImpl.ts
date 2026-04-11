@@ -1,28 +1,28 @@
-import { type DomEventListener, type DomEventListenerDisposer, type DomEventOf } from "@/events";
+import { type EventListener, type EventListenerDisposer, type DomEventOf } from "@/events";
 
-export class _DomEventListenerImpl<
+export class _EventListenerImpl<
     TTarget extends EventTarget = EventTarget,
     TEventMap extends object = GlobalEventHandlersEventMap,
-> implements DomEventListener<TTarget, TEventMap> {
+> implements EventListener<TTarget, TEventMap> {
     bind<TKey extends keyof TEventMap & string>(
         target: TTarget,
         type: TKey,
         listener: (event: DomEventOf<TEventMap, TKey>) => void,
         options?: AddEventListenerOptions,
-    ): DomEventListenerDisposer {
+    ): EventListenerDisposer {
         const { signal, ...rest } = options ?? {};
 
         if (signal?.aborted) {
             return () => {};
         }
 
-        const handler: EventListener = (event) => {
+        const handler: globalThis.EventListener = (event) => {
             listener(event as DomEventOf<TEventMap, TKey>);
         };
 
         let disposed = false;
 
-        const dispose: DomEventListenerDisposer = () => {
+        const dispose: EventListenerDisposer = () => {
             if (disposed) {
                 return;
             }

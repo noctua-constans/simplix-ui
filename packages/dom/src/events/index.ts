@@ -1,1 +1,1 @@
-export * from "./dom-event-listener";
+export * from "./event-listener";
