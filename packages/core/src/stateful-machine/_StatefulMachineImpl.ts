@@ -4,20 +4,20 @@ import type { TransitionTable } from "@/transition-table";
 import type { StateEventOf } from "@/types";
 
 export class _StatefulMachineImpl<S extends string, C, E extends StateEventOf> implements StatefulMachine<S, C, E> {
-    #store: MutableState<MachineSnapshot<S, C>>;
+    #state: MutableState<MachineSnapshot<S, C>>;
     readonly #table: TransitionTable<S, C, E>;
 
     constructor(options: StatefulMachineOptions<S, C, E>) {
-        this.#store = createMutableState({ state: options.initialState, context: options.context });
+        this.#state = createMutableState({ state: options.initialState, context: options.context });
         this.#table = options.table;
     }
 
     get(): MachineSnapshot<S, C> {
-        return this.#store.get();
+        return this.#state.get();
     }
 
     send<T extends E["type"]>(event: Extract<E, { type: T }>): void {
-        const current = this.#store.get();
+        const current = this.#state.get();
 
         const transition = this.#table.resolve(current.state, current.context, event);
 
@@ -34,15 +34,15 @@ export class _StatefulMachineImpl<S extends string, C, E extends StateEventOf> i
             return;
         }
 
-        this.#store.set({ state: next, context });
+        this.#state.set({ state: next, context });
     }
 
     can<T extends E["type"]>(event: Extract<E, { type: T }>): boolean {
-        const current = this.#store.get();
+        const current = this.#state.get();
         return this.#table.can(current.state, current.context, event);
     }
 
     subscribe(listener: () => void): () => void {
-        return this.#store.subscribe(listener);
+        return this.#state.subscribe(listener);
     }
 }
