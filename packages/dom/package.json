@@ -1,7 +1,19 @@
 {
     "name": "@simplix/dom",
     "version": "0.1.0",
-    "description": "A modular, type-safe foundation for Simplix UI. Headless logic, utilities, and shared primitives for building consistent UI components.",
+    "description": "Shared DOM event and interaction logic for UI framework adapters built on Simplix behavior contracts.",
+    "keywords": [
+        "dom",
+        "dom-events",
+        "event-listener",
+        "event-binding",
+        "keyboard-events",
+        "pointer-events",
+        "focus-events",
+        "interaction-bindings",
+        "framework-adapter",
+        "typescript"
+    ],
     "license": "Apache-2.0",
     "type": "module",
     "author": {

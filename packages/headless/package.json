@@ -1,7 +1,19 @@
 {
     "name": "@simplix/headless",
     "version": "0.1.0",
-    "description": "A modular, type-safe foundation for Simplix UI. Headless logic, utilities, and shared primitives for building consistent UI components.",
+    "description": "Public behavior contracts and headless logic built on @simplix/core, without DOM or UI assumptions.",
+    "keywords": [
+        "headless",
+        "behavior-contracts",
+        "component-behavior",
+        "interaction-patterns",
+        "control-logic",
+        "framework-agnostic",
+        "renderless",
+        "unstyled",
+        "accessibility",
+        "typescript"
+    ],
     "license": "Apache-2.0",
     "type": "module",
     "author": {
