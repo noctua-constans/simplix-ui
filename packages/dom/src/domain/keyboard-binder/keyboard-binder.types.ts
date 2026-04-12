@@ -1,8 +1,4 @@
-import type { EventListenerDisposer, EventListener } from "@/events";
-
-export type KeyboardBinderOptions<TTarget extends EventTarget = EventTarget> = {
-    listener?: EventListener<TTarget>;
-};
+import type { EventListenerDisposer } from "@/events";
 
 export interface KeyboardBinder<TTarget extends EventTarget = EventTarget> {
     bindKeyDown(

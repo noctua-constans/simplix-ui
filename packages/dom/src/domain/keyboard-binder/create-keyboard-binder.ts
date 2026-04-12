@@ -1,9 +1,9 @@
 import { _KeyboardBinderImpl } from "./_KeyboardBinderImpl";
 
-import type { KeyboardBinder, KeyboardBinderOptions } from "@/domain";
+import type { KeyboardBinder, BinderOptions } from "@/domain";
 
 export function createKeyboardBinder<TTarget extends EventTarget = EventTarget>(
-    options?: KeyboardBinderOptions<TTarget>,
+    options?: BinderOptions<TTarget>,
 ): KeyboardBinder<TTarget> {
     return new _KeyboardBinderImpl<TTarget>(options);
 }
