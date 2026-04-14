@@ -8,18 +8,19 @@
         "packages/react-dom"
     ],
     "scripts": {
-        "typecheck": "pnpm -r typecheck",
+        "build": "pnpm -r build",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
+        "typecheck": "pnpm -r typecheck",
         "test": "pnpm -r test",
-        "build": "pnpm -r build",
-        "clean": "pnpm -r clean",
+        "test:coverage": "pnpm -r test:coverage",
+        "test:coverage:text": "pnpm -r test:coverage:text",
+        "test:coverage:html": "pnpm -r test:coverage:html",
         "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
     },
     "packageManager": "pnpm@10.25.0",
     "devDependencies": {
         "@eslint/js": "^9.39.1",
-        "@vitest/coverage-v8": "^4.0.17",
         "eslint": "^9.39.1",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-import": "^2.32.0",

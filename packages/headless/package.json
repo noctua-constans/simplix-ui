@@ -1,6 +1,6 @@
 {
     "name": "@simplix/headless",
-    "version": "0.2.0",
+    "version": "0.2.2",
     "description": "Public behavior contracts and headless logic built on @simplix/core, without DOM or UI assumptions.",
     "keywords": [
         "headless",
@@ -53,11 +53,12 @@
     },
     "scripts": {
         "build": "tsup",
-        "clean": "rm -rf dist",
-        "test": "vitest run",
-        "test:coverage": "vitest run --coverage --coverage.reporter=text",
-        "typecheck:src": "tsc -p tsconfig.json --noEmit",
-        "typecheck": "pnpm run typecheck:src && pnpm run typecheck:test"
+        "typecheck": "tsc -p tsconfig.json --noEmit"
     },
-    "packageManager": "pnpm@10.25.0"
+    "packageManager": "pnpm@10.25.0",
+    "devDependencies": {
+        "vite-tsconfig-paths": "^6.1.1",
+        "vitest": "^4.0.17",
+        "@vitest/coverage-v8": "^4.0.17"
+    }
 }
