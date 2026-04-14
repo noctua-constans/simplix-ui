@@ -3,9 +3,9 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"]
+            "@/*": ["src/*"],
         },
-        "rootDir": "./src",
+        "rootDir": ".",
         "outDir": "./dist",
         "types": ["./src/environment"]
     },

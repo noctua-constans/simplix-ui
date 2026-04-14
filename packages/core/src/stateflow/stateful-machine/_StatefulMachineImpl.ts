@@ -1,7 +1,12 @@
-import { type MutableState, createMutableState } from "@/mutable-state";
-import type { StatefulMachineOptions, StatefulMachine, MachineSnapshot } from "@/stateful-machine";
-import type { TransitionTable } from "@/transition-table";
-import type { StateEventOf } from "@/types";
+import {
+    createMutableState,
+    type MachineSnapshot,
+    type MutableState,
+    type StateEventOf,
+    type StatefulMachine,
+    type StatefulMachineOptions,
+    type TransitionTable,
+} from "@/stateflow";
 
 export class _StatefulMachineImpl<S extends string, C, E extends StateEventOf> implements StatefulMachine<S, C, E> {
     #state: MutableState<MachineSnapshot<S, C>>;

@@ -1,7 +1,6 @@
 import { _TransitionTableImpl } from "./_TransitionTableImpl";
 
-import type { TransitionTable, TransitionTableOptions } from "@/transition-table";
-import type { StateEventOf } from "@/types";
+import type { StateEventOf, TransitionTable, TransitionTableOptions } from "@/stateflow";
 
 export function createTransitionTable<S extends string, C, E extends StateEventOf>(
     options: TransitionTableOptions<S, C, E>,

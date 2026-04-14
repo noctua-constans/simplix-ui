@@ -1,4 +1,4 @@
-import type { MutableState, MutableStateOptions, Equality } from "@/mutable-state";
+import type { MutableState, MutableStateOptions, Equality } from "@/stateflow";
 import type { Listener, Unsubscribe } from "@/types";
 
 export class _MutableStateImpl<T> implements MutableState<T> {

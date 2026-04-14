@@ -52,7 +52,9 @@
         "build": "tsup",
         "clean": "rm -rf dist",
         "test": "vitest run",
-        "test:coverage": "vitest run --coverage --coverage.reporter=text"
+        "test:coverage": "vitest run --coverage --coverage.reporter=text-summary --coverage.reporter=json",
+        "test:coverage:text": "vitest run --coverage --coverage.reporter=text",
+        "test:coverage:html": "vitest run --coverage --coverage.reporter=html"
     },
     "packageManager": "pnpm@10.25.0",
     "devDependencies": {

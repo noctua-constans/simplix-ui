@@ -1,5 +1,4 @@
-import type { Transitions, TransitionTableOptions, TransitionTable, Transition } from "@/transition-table";
-import type { StateEventOf } from "@/types";
+import type { StateEventOf, Transition, Transitions, TransitionTable, TransitionTableOptions } from "@/stateflow";
 
 export class _TransitionTableImpl<S extends string, C, E extends StateEventOf> implements TransitionTable<S, C, E> {
     readonly #transitions: Transitions<S, C, E>;
