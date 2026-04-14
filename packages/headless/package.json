@@ -1,6 +1,6 @@
 {
     "name": "@simplix/headless",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Public behavior contracts and headless logic built on @simplix/core, without DOM or UI assumptions.",
     "keywords": [
         "headless",
