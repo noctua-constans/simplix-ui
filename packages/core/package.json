@@ -1,8 +1,20 @@
 {
     "name": "@simplix/core",
-    "version": "0.1.0",
-    "description": "A modular, type-safe foundation for Simplix UI. Headless logic, utilities, and shared primitives for building consistent UI components.",
-    "license": "MIT",
+    "version": "0.2.0",
+    "description": "Low-level engines for state, transitions, and reusable runtime primitives.",
+    "keywords": [
+        "state-machine",
+        "finite-state-machine",
+        "state",
+        "transitions",
+        "transition-table",
+        "runtime",
+        "primitives",
+        "observable",
+        "subscriptions",
+        "typescript"
+    ],
+    "license": "Apache-2.0",
     "type": "module",
     "author": {
         "name": "Noctua Constans",
@@ -29,7 +41,8 @@
     "files": [
         "dist",
         "README.md",
-        "LICENSE"
+        "LICENSE",
+        "NOTICE"
     ],
     "engines": {
         "node": ">=20",
@@ -37,33 +50,15 @@
     },
     "scripts": {
         "build": "tsup",
-        "clean": "rm -rf {dist,node_modules}",
+        "clean": "rm -rf dist",
         "test": "vitest run",
-        "test:watch": "vitest",
-        "test:coverage": "vitest run --coverage"
+        "test:coverage": "vitest run --coverage --coverage.reporter=text-summary --coverage.reporter=json",
+        "test:coverage:text": "vitest run --coverage --coverage.reporter=text",
+        "test:coverage:html": "vitest run --coverage --coverage.reporter=html"
     },
-    "keywords": [
-        "react",
-        "react-ui",
-        "react-components",
-        "ui-library",
-        "design-system",
-        "component-library",
-        "typescript",
-        "headless",
-        "headless-ui",
-        "atomic-design",
-        "ui-constructor",
-        "tokens",
-        "theming",
-        "css-agnostic",
-        "unopinionated",
-        "rslx",
-        "simplix"
-    ],
     "packageManager": "pnpm@10.25.0",
     "devDependencies": {
-        "@vitest/coverage-v8": "^4.0.17",
+        "vite-tsconfig-paths": "^6.1.1",
         "vitest": "^4.0.17"
     }
 }

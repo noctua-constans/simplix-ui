@@ -1,8 +1,20 @@
 {
     "name": "@simplix/headless",
-    "version": "0.1.0",
-    "description": "A modular, type-safe foundation for Simplix UI. Headless logic, utilities, and shared primitives for building consistent UI components.",
-    "license": "MIT",
+    "version": "0.2.0",
+    "description": "Public behavior contracts and headless logic built on @simplix/core, without DOM or UI assumptions.",
+    "keywords": [
+        "headless",
+        "behavior-contracts",
+        "component-behavior",
+        "interaction-patterns",
+        "control-logic",
+        "framework-agnostic",
+        "renderless",
+        "unstyled",
+        "accessibility",
+        "typescript"
+    ],
+    "license": "Apache-2.0",
     "type": "module",
     "author": {
         "name": "Noctua Constans",
@@ -29,7 +41,8 @@
     "files": [
         "dist",
         "README.md",
-        "LICENSE"
+        "LICENSE",
+        "NOTICE"
     ],
     "dependencies": {
         "@simplix/core": "workspace:^"
@@ -40,15 +53,11 @@
     },
     "scripts": {
         "build": "tsup",
-        "clean": "rm -rf {dist,node_modules}"
+        "clean": "rm -rf dist",
+        "test": "vitest run",
+        "test:coverage": "vitest run --coverage --coverage.reporter=text",
+        "typecheck:src": "tsc -p tsconfig.json --noEmit",
+        "typecheck": "pnpm run typecheck:src && pnpm run typecheck:test"
     },
-    "keywords": [
-        "typescript",
-        "simplix",
-        "ui",
-        "components",
-        "library",
-        "headless"
-    ],
     "packageManager": "pnpm@10.25.0"
 }

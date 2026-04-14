@@ -1,13 +1,13 @@
 import { defineConfig, type Options } from "tsup";
 
 export type TsupPresetOptions = {
-    entry?: string[];
+    entry?: Record<string, string>;
     external?: string[];
     dts?: boolean;
 };
 
 export function createTsupConfig(options: TsupPresetOptions = {}) {
-    const { entry = ["./src/index.ts"], external = [], dts = true } = options;
+    const { entry = { index: "./src/index.ts" }, external = [], dts = true } = options;
 
     const base: Options = {
         entry,

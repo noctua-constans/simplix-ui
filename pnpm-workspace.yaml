@@ -1,7 +1,8 @@
 packages:
   - packages/core
   - packages/headless
-  - packages/ui/*
+  - packages/dom
+  - packages/react-dom
 
 onlyBuiltDependencies:
   - esbuild
