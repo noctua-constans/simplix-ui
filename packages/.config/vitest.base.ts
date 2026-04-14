@@ -8,7 +8,7 @@ export function createVitestConfig(additional?: ViteUserConfig) {
                 exclude: ["**/index.ts", "**/*.types.ts"],
             },
             environment: "node",
-            include: ["test/**/*.ts"],
+            include: ["test/**/*.test.ts"],
             clearMocks: true,
             restoreMocks: true,
             mockReset: true,
