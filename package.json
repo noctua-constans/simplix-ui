@@ -5,7 +5,7 @@
         "packages/core",
         "packages/headless",
         "packages/dom",
-        "packages/react"
+        "packages/react-dom"
     ],
     "scripts": {
         "typecheck": "pnpm -r typecheck",
@@ -19,8 +19,6 @@
     "packageManager": "pnpm@10.25.0",
     "devDependencies": {
         "@eslint/js": "^9.39.1",
-        "@types/react": "^19.2",
-        "@types/react-dom": "^19.2",
         "@vitest/coverage-v8": "^4.0.17",
         "eslint": "^9.39.1",
         "eslint-config-prettier": "^10.1.8",
@@ -30,8 +28,6 @@
         "globals": "^16.5.0",
         "jiti": "^2.6.1",
         "prettier": "^3.7.4",
-        "react": "^19.2",
-        "react-dom": "^19.2",
         "tsup": "^8.5.1",
         "typescript": "^5.7",
         "typescript-eslint": "^8.48.1",

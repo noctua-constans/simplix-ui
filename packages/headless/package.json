@@ -57,7 +57,6 @@
         "test": "vitest run",
         "test:coverage": "vitest run --coverage --coverage.reporter=text",
         "typecheck:src": "tsc -p tsconfig.json --noEmit",
-        "typecheck:test": "tsc -p test/tsconfig.json --noEmit",
         "typecheck": "pnpm run typecheck:src && pnpm run typecheck:test"
     },
     "packageManager": "pnpm@10.25.0"

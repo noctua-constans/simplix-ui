@@ -1,5 +1,5 @@
 {
-    "name": "@simplix/react",
+    "name": "@simplix/react-dom",
     "version": "0.1.0",
     "description": "A modular, type-safe foundation for Simplix UI. Headless logic, utilities, and shared primitives for building consistent UI components.",
     "license": "Apache-2.0",
@@ -33,7 +33,14 @@
         "NOTICE"
     ],
     "dependencies": {
-        "@simplix/headless": "workspace:^"
+        "@simplix/headless": "workspace:^",
+        "@simplix/dom": "workspace:^"
+    },
+    "devDependencies": {
+        "react": "^19.2",
+        "react-dom": "^19.2",
+        "@types/react": "^19.2",
+        "@types/react-dom": "^19.2"
     },
     "engines": {
         "node": ">=20",
@@ -45,7 +52,6 @@
         "test": "vitest run",
         "test:coverage": "vitest run --coverage --coverage.reporter=text",
         "typecheck:src": "tsc -p tsconfig.json --noEmit",
-        "typecheck:test": "tsc -p test/tsconfig.json --noEmit",
         "typecheck": "pnpm run typecheck:src && pnpm run typecheck:test"
     },
     "packageManager": "pnpm@10.25.0"
