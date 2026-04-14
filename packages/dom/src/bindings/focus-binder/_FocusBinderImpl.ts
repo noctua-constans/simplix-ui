@@ -1,11 +1,12 @@
-import type { FocusBinder, BinderOptions } from "@/domain";
-import { type EventListener, createEventListener, type EventListenerDisposer } from "@/events";
+import type { BinderOptions, FocusBinder } from "@/bindings";
+import { createEventListener, type EventListener, type EventListenerDisposer } from "@/events";
 
 export class _FocusBinderImpl<TTarget extends EventTarget = EventTarget> implements FocusBinder<TTarget> {
     readonly #listener: EventListener<TTarget>;
 
-    constructor(options?: BinderOptions<TTarget>) {
-        this.#listener = options?.listener ?? createEventListener();
+    constructor(options: BinderOptions<TTarget> = {}) {
+        const { listener = createEventListener() } = options;
+        this.#listener = listener;
     }
 
     bindFocus(
@@ -13,7 +14,7 @@ export class _FocusBinderImpl<TTarget extends EventTarget = EventTarget> impleme
         listener: (event: FocusEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "focus", listener, options);
+        return this.#listener.add(target, "focus", listener, options);
     }
 
     bindBlur(
@@ -21,7 +22,7 @@ export class _FocusBinderImpl<TTarget extends EventTarget = EventTarget> impleme
         listener: (event: FocusEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "blur", listener, options);
+        return this.#listener.add(target, "blur", listener, options);
     }
 
     bindFocusIn(
@@ -29,7 +30,7 @@ export class _FocusBinderImpl<TTarget extends EventTarget = EventTarget> impleme
         listener: (event: FocusEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "focusin", listener, options);
+        return this.#listener.add(target, "focusin", listener, options);
     }
 
     bindFocusOut(
@@ -37,6 +38,6 @@ export class _FocusBinderImpl<TTarget extends EventTarget = EventTarget> impleme
         listener: (event: FocusEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "focusout", listener, options);
+        return this.#listener.add(target, "focusout", listener, options);
     }
 }

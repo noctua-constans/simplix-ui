@@ -1,11 +1,12 @@
-import { type PointerBinder, type BinderOptions } from "@/domain";
-import { type EventListener, createEventListener, type EventListenerDisposer } from "@/events";
+import { type BinderOptions, type PointerBinder } from "@/bindings";
+import { createEventListener, type EventListener, type EventListenerDisposer } from "@/events";
 
 export class _PointerBinderImpl<TTarget extends EventTarget = EventTarget> implements PointerBinder<TTarget> {
     readonly #listener: EventListener<TTarget>;
 
-    constructor(options?: BinderOptions<TTarget>) {
-        this.#listener = options?.listener ?? createEventListener();
+    constructor(options: BinderOptions<TTarget> = {}) {
+        const { listener = createEventListener() } = options;
+        this.#listener = listener;
     }
 
     bindPointerDown(
@@ -13,7 +14,7 @@ export class _PointerBinderImpl<TTarget extends EventTarget = EventTarget> imple
         listener: (event: PointerEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "pointerdown", listener, options);
+        return this.#listener.add(target, "pointerdown", listener, options);
     }
 
     bindPointerUp(
@@ -21,7 +22,7 @@ export class _PointerBinderImpl<TTarget extends EventTarget = EventTarget> imple
         listener: (event: PointerEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "pointerup", listener, options);
+        return this.#listener.add(target, "pointerup", listener, options);
     }
 
     bindPointerMove(
@@ -29,7 +30,7 @@ export class _PointerBinderImpl<TTarget extends EventTarget = EventTarget> imple
         listener: (event: PointerEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "pointermove", listener, options);
+        return this.#listener.add(target, "pointermove", listener, options);
     }
 
     bindPointerEnter(
@@ -37,7 +38,7 @@ export class _PointerBinderImpl<TTarget extends EventTarget = EventTarget> imple
         listener: (event: PointerEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "pointerenter", listener, options);
+        return this.#listener.add(target, "pointerenter", listener, options);
     }
 
     bindPointerLeave(
@@ -45,7 +46,7 @@ export class _PointerBinderImpl<TTarget extends EventTarget = EventTarget> imple
         listener: (event: PointerEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "pointerleave", listener, options);
+        return this.#listener.add(target, "pointerleave", listener, options);
     }
 
     bindPointerCancel(
@@ -53,6 +54,6 @@ export class _PointerBinderImpl<TTarget extends EventTarget = EventTarget> imple
         listener: (event: PointerEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "pointercancel", listener, options);
+        return this.#listener.add(target, "pointercancel", listener, options);
     }
 }

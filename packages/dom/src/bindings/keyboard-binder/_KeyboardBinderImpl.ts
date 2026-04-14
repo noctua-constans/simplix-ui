@@ -1,11 +1,12 @@
-import type { KeyboardBinder, BinderOptions } from "@/domain";
+import type { KeyboardBinder, BinderOptions } from "@/bindings";
 import { type EventListenerDisposer, type EventListener, createEventListener } from "@/events";
 
 export class _KeyboardBinderImpl<TTarget extends EventTarget = EventTarget> implements KeyboardBinder<TTarget> {
     readonly #listener: EventListener<TTarget>;
 
-    constructor(options?: BinderOptions<TTarget>) {
-        this.#listener = options?.listener ?? createEventListener();
+    constructor(options: BinderOptions<TTarget> = {}) {
+        const { listener = createEventListener() } = options;
+        this.#listener = listener;
     }
 
     bindKeyDown(
@@ -13,7 +14,7 @@ export class _KeyboardBinderImpl<TTarget extends EventTarget = EventTarget> impl
         listener: (event: KeyboardEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "keydown", listener, options);
+        return this.#listener.add(target, "keydown", listener, options);
     }
 
     bindKeyUp(
@@ -21,6 +22,6 @@ export class _KeyboardBinderImpl<TTarget extends EventTarget = EventTarget> impl
         listener: (event: KeyboardEvent) => void,
         options?: AddEventListenerOptions,
     ): EventListenerDisposer {
-        return this.#listener.bind(target, "keyup", listener, options);
+        return this.#listener.add(target, "keyup", listener, options);
     }
 }

@@ -6,7 +6,7 @@ export interface EventListener<
     TTarget extends EventTarget = EventTarget,
     TEventMap extends object = GlobalEventHandlersEventMap,
 > {
-    bind<TKey extends keyof TEventMap & string>(
+    add<TKey extends keyof TEventMap & string>(
         target: TTarget,
         type: TKey,
         listener: (event: DomEventOf<TEventMap, TKey>) => void,

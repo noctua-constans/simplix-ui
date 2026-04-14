@@ -4,13 +4,13 @@ export class _EventListenerImpl<
     TTarget extends EventTarget = EventTarget,
     TEventMap extends object = GlobalEventHandlersEventMap,
 > implements EventListener<TTarget, TEventMap> {
-    bind<TKey extends keyof TEventMap & string>(
+    add<TKey extends keyof TEventMap & string>(
         target: TTarget,
         type: TKey,
         listener: (event: DomEventOf<TEventMap, TKey>) => void,
-        options?: AddEventListenerOptions,
+        options: AddEventListenerOptions = {},
     ): EventListenerDisposer {
-        const { signal, ...rest } = options ?? {};
+        const { signal, ...rest } = options;
 
         if (signal?.aborted) {
             return () => {};
