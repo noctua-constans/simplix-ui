@@ -1,8 +1,8 @@
 import type { CSSProperties, ElementType, JSX } from "react";
 
-import type { LayoutProps } from "@/layouts";
+import type { BoxProps } from "@/layouts";
 
-export function Layout<T extends ElementType = "div">(props: LayoutProps<T>): JSX.Element {
+export function Box<T extends ElementType = "div">(props: BoxProps<T>): JSX.Element {
     const { as, children, className, style, ...rest } = props;
     const {
         width,

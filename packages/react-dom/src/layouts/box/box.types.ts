@@ -2,7 +2,7 @@ import type { CSSProperties, ElementType } from "react";
 
 import type { PolymorphicComponentWithRef } from "@/types";
 
-export type LayoutProps<T extends ElementType> = PolymorphicComponentWithRef<
+export type BoxProps<T extends ElementType> = PolymorphicComponentWithRef<
     T,
     {
         width?: CSSProperties["width"];

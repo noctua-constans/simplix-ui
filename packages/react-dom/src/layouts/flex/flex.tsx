@@ -1,6 +1,6 @@
 import type { CSSProperties, ElementType, JSX } from "react";
 
-import { type FlexProps, Layout } from "@/layouts";
+import { type FlexProps, Box } from "@/layouts";
 
 export function Flex<T extends ElementType = "div">(props: FlexProps<T>): JSX.Element {
     const { as, style, ...rest } = props;
@@ -17,5 +17,5 @@ export function Flex<T extends ElementType = "div">(props: FlexProps<T>): JSX.El
         ...style,
     };
 
-    return <Layout as={Tag} style={inlineStyles} {...others} />;
+    return <Box as={Tag} style={inlineStyles} {...others} />;
 }
