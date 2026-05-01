@@ -1,7 +1,7 @@
 import type { Cursor, Sequence } from "@/identity";
 import type { Resetable } from "@/types";
 
-export type IdOptions = {
+export type KeyOptions = {
     prefix?: string;
     suffix?: string;
     separator?: string;
@@ -9,4 +9,4 @@ export type IdOptions = {
     sequence?: Sequence;
 };
 
-export interface Id extends Cursor<string>, Resetable<number> {}
+export interface Key extends Cursor<string>, Resetable<number> {}

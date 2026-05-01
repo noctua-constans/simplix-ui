@@ -1,13 +1,13 @@
-import { type Id, type Sequence, type IdOptions, createSequence } from "@/identity";
+import { createSequence, type Key, type KeyOptions, type Sequence } from "@/identity";
 
-export class _IdImpl implements Id {
+export class _KeyImpl implements Key {
     readonly #prefix: string;
     readonly #suffix: string;
     readonly #separator: string;
     readonly #scope: string;
     readonly #sequence: Sequence;
 
-    constructor(options: IdOptions = {}) {
+    constructor(options: KeyOptions = {}) {
         const { prefix = "", suffix = "", separator = "-", scope = "undefined", sequence = createSequence() } = options;
 
         this.#prefix = prefix;
