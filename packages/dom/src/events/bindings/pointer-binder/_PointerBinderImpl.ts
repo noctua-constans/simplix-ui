@@ -1,5 +1,10 @@
-import { type BinderOptions, type PointerBinder } from "@/bindings";
-import { createEventListener, type EventListener, type EventListenerDisposer } from "@/events";
+import {
+    type BinderOptions,
+    createEventListener,
+    type EventListener,
+    type EventListenerDisposer,
+    type PointerBinder,
+} from "@/events";
 
 export class _PointerBinderImpl<TTarget extends EventTarget = EventTarget> implements PointerBinder<TTarget> {
     readonly #listener: EventListener<TTarget>;

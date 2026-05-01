@@ -1,5 +1,10 @@
-import type { KeyboardBinder, BinderOptions } from "@/bindings";
-import { type EventListenerDisposer, type EventListener, createEventListener } from "@/events";
+import {
+    type BinderOptions,
+    createEventListener,
+    type EventListener,
+    type EventListenerDisposer,
+    type KeyboardBinder,
+} from "@/events";
 
 export class _KeyboardBinderImpl<TTarget extends EventTarget = EventTarget> implements KeyboardBinder<TTarget> {
     readonly #listener: EventListener<TTarget>;

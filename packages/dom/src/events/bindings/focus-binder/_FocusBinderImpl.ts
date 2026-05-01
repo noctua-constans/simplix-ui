@@ -1,5 +1,10 @@
-import type { BinderOptions, FocusBinder } from "@/bindings";
-import { createEventListener, type EventListener, type EventListenerDisposer } from "@/events";
+import {
+    type BinderOptions,
+    createEventListener,
+    type EventListener,
+    type EventListenerDisposer,
+    type FocusBinder,
+} from "@/events";
 
 export class _FocusBinderImpl<TTarget extends EventTarget = EventTarget> implements FocusBinder<TTarget> {
     readonly #listener: EventListener<TTarget>;
