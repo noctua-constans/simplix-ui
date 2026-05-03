@@ -1,45 +1,91 @@
-name: Packages
+  name: Packages
 
-on:
-  pull_request:
-  push:
-    branches: [ main ]
+  on:
+    pull_request:
+    push:
+      branches: [ main ]
 
-permissions:
-  contents: read
+  permissions:
+    contents: read
+    pull-requests: read
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
-jobs:
-  verify:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  jobs:
+    changes:
+      runs-on: ubuntu-latest
+      outputs:
+        core: ${{ steps.filter.outputs.core }}
+        headless: ${{ steps.filter.outputs.headless }}
+        vanilla-dom: ${{ steps.filter.outputs.vanilla-dom }}
+        workspace: ${{ steps.filter.outputs.workspace }}
+      steps:
+        - uses: actions/checkout@v4
+        - uses: dorny/paths-filter@v3
+          id: filter
+          with:
+            filters: |
+              core:
+                - 'packages/core/**'
+              headless:
+                - 'packages/headless/**'
+              vanilla-dom:
+                - 'packages/vanilla-dom/**'
+              workspace:
+                - 'package.json'
+                - 'pnpm-lock.yaml'
+                - 'pnpm-workspace.yaml'
+                - '.github/workflows/**'
+                - 'eslint.config.mts'
+                - '.prettierrc'
 
-      - name: PNPM
-        uses: pnpm/action-setup@v4
+    core:
+      needs: changes
+      if: needs.changes.outputs.core == 'true' || needs.changes.outputs.workspace == 'true'
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: pnpm/action-setup@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            cache: pnpm
 
-      - name: Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "pnpm"
+        - run: pnpm install --frozen-lockfile
+        - run: pnpm --filter @simplix/core typecheck
+        - run: pnpm --filter @simplix/core test
+        - run: pnpm --filter @simplix/core build
 
-      - name: Project
-        run: pnpm install --frozen-lockfile
+    headless:
+      needs: changes
+      if: needs.changes.outputs.headless == 'true' || needs.changes.outputs.workspace == 'true'
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: pnpm/action-setup@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            cache: pnpm
 
-      - name: Lint
-        run: pnpm lint
+        - run: pnpm install --frozen-lockfile
+        - run: pnpm --filter @simplix/headless typecheck
+        - run: pnpm --filter @simplix/headless build
 
-      - name: Typecheck
-        run: pnpm typecheck
+    vanilla-dom:
+      needs: changes
+      if: needs.changes.outputs.vanilla-dom == 'true' || needs.changes.outputs.workspace == 'true'
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: pnpm/action-setup@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            cache: pnpm
 
-      - name: Test
-        run: pnpm test
-
-      - name: Build
-        run: pnpm build
+        - run: pnpm install --frozen-lockfile
+        - run: pnpm --filter @simplix/vanilla-dom typecheck
+        - run: pnpm --filter @simplix/vanilla-dom build
