@@ -1,5 +1,5 @@
 {
-    "name": "@simplix/dom",
+    "name": "@simplix/vanilla-dom",
     "version": "0.2.2",
     "description": "Shared DOM event and interaction logic for UI framework adapters built on Simplix behavior contracts.",
     "keywords": [

@@ -34,13 +34,13 @@
     ],
     "dependencies": {
         "@simplix/headless": "workspace:^",
-        "@simplix/dom": "workspace:^"
+        "@simplix/vanilla-dom": "workspace:^"
     },
     "devDependencies": {
-        "react": "^19.2",
-        "react-dom": "^19.2",
-        "@types/react": "^19.2",
-        "@types/react-dom": "^19.2"
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+        "react": "^19.2.5",
+        "react-dom": "^19.2.5"
     },
     "peerDependencies": {
         "react": "^19.2",
