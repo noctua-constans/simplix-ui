@@ -5,9 +5,10 @@ import type { PolymorphicComponentWithRef } from "@/types";
 
 export type StackDirection = "vertical" | "horizontal";
 
-export type StackProps<T extends ElementType = "div"> = PolymorphicComponentWithRef<
+export type StackProps<T extends ElementType> = PolymorphicComponentWithRef<
     T,
     Omit<FlexProps<T>, "direction"> & {
         direction?: StackDirection;
+        reverse?: boolean;
     }
 >;

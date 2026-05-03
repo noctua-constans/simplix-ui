@@ -1,10 +1,13 @@
 import type { ElementType, JSX } from "react";
 
-import { type StackProps, Flex } from "@/layouts";
+import { Flex, type StackProps } from "@/layouts";
 
 export function Stack<T extends ElementType = "div">(props: StackProps<T>): JSX.Element {
-    const { as, direction = "vertical", ...rest } = props;
+    const { as, direction = "vertical", reverse = false, ...rest } = props;
     const Tag: ElementType = as ?? "div";
 
-    return <Flex as={Tag} direction={direction === "vertical" ? "column" : "row"} {...rest} />;
+    const flexDirection =
+        direction === "vertical" ? (reverse ? "column-reverse" : "column") : reverse ? "row-reverse" : "row";
+
+    return <Flex as={Tag} direction={flexDirection} {...rest} />;
 }
