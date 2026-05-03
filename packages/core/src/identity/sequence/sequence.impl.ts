@@ -1,6 +1,6 @@
 import type { Sequence, SequenceOptions } from "@/identity";
 
-export class _SequenceImpl implements Sequence {
+export class SequenceImpl implements Sequence {
     readonly #from: number;
     readonly #to: number;
     readonly #step: number;

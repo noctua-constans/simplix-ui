@@ -1,6 +1,7 @@
-import { createSequence, type Key, type KeyOptions, type Sequence } from "@/identity";
+import type { Key, KeyOptions } from "./key.types";
+import { createSequence, type Sequence } from "../sequence";
 
-export class _KeyImpl implements Key {
+export class KeyImpl implements Key {
     readonly #prefix: string;
     readonly #suffix: string;
     readonly #separator: string;

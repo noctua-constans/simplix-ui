@@ -1,4 +1,6 @@
-import type { Cursor, Sequence } from "@/identity";
+import type { Cursor } from "../identity.types";
+import type { Sequence } from "../sequence";
+
 import type { Resetable } from "@/types";
 
 export type KeyOptions = {

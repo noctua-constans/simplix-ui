@@ -1,6 +1,6 @@
-import { DEFAULT_TOKEN_CHARSET, type Token, type TokenOptions } from "@/identity";
+import { DEFAULT_TOKEN_CHARSET, type Token, type TokenOptions } from "./token.types";
 
-export class _TokenImpl<TKey> implements Token<TKey> {
+export class TokenImpl<TKey> implements Token<TKey> {
     readonly #length: number;
     readonly #charset: string;
 
@@ -13,13 +13,14 @@ export class _TokenImpl<TKey> implements Token<TKey> {
 
     constructor(options: TokenOptions<TKey> = {}) {
         const { length = 12, charset = DEFAULT_TOKEN_CHARSET, map = {} } = options;
+        const { key = (index: number) => index as TKey, keys, size = 16 } = map;
 
         this.#length = length;
         this.#charset = charset;
 
-        this.#mapKey = map.key ?? ((index: number) => index as TKey);
-        this.#mapKeys = map.keys;
-        this.#mapSize = map.size ?? 16;
+        this.#mapKey = key;
+        this.#mapKeys = keys;
+        this.#mapSize = size;
     }
 
     get(): string {

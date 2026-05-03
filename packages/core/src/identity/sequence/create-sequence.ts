@@ -1,7 +1,6 @@
-import { _SequenceImpl } from "./_SequenceImpl";
-
-import type { SequenceOptions, Sequence } from "@/identity";
+import { SequenceImpl } from "./sequence.impl";
+import type { Sequence, SequenceOptions } from "./sequence.types";
 
 export function createSequence(options?: SequenceOptions): Sequence {
-    return new _SequenceImpl(options);
+    return new SequenceImpl(options);
 }
