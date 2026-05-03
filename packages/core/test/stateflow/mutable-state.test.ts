@@ -32,7 +32,7 @@ describe("createMutableState", () => {
     });
 
     it("uses custom equality before setting the next value", () => {
-        const state = createMutableState({ id: 1, label: "one" }, { equals: (a, b) => a.id === b.id });
+        const state = createMutableState({ id: 1, label: "one" }, (a, b) => a.id === b.id);
         const listener = vi.fn();
 
         state.subscribe(listener);

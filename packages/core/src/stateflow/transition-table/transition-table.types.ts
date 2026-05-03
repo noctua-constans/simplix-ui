@@ -1,38 +1,38 @@
-import type { StateEventOf } from "@/stateflow";
+import type { StateEventOf } from "../stateflow.types";
 
-export type Guard<From extends string, C, Ev extends StateEventOf> = (options: {
+export type Guard<From extends string, Ev extends StateEventOf, C extends object> = (options: {
     state: From;
-    context: C;
     event: Ev;
+    context: C;
 }) => boolean;
 
-export type Reducer<From extends string, C, Ev extends StateEventOf> = (options: {
+export type Reducer<From extends string, Ev extends StateEventOf, C extends object> = (options: {
     state: From;
-    context: C;
     event: Ev;
+    context: C;
 }) => C;
 
-export type Transition<S extends string, From extends S, C, Ev extends StateEventOf> = {
+export type Transition<S extends string, From extends S, Ev extends StateEventOf, C extends object> = {
     target?: S;
-    guard?: Guard<From, C, Ev>;
-    reduce?: Reducer<From, C, Ev>;
+    guard?: Guard<From, Ev, C>;
+    reduce?: Reducer<From, Ev, C>;
 };
 
-export type Transitions<S extends string, C, E extends StateEventOf> = {
+export type Transitions<S extends string, E extends StateEventOf, C extends object> = {
     [From in S]: Partial<{
-        [Type in E["type"]]: Transition<S, From, C, Extract<E, { type: Type }>>;
+        [Type in E["type"]]: Transition<S, From, Extract<E, { type: Type }>, C>;
     }>;
 };
 
-export type TransitionTableOptions<S extends string, C, E extends StateEventOf> = {
-    transitions: Transitions<S, C, E>;
-};
+export type TransitionTableOptions<S extends string, E extends StateEventOf, C extends object> = [
+    transitions: Transitions<S, E, C>,
+];
 
-export interface TransitionTable<S extends string, C, E extends StateEventOf> {
+export interface TransitionTable<S extends string, E extends StateEventOf, C extends object> {
     resolve<T extends E["type"]>(
         state: S,
-        context: C,
         event: Extract<E, { type: T }>,
-    ): Transition<S, S, C, Extract<E, { type: T }>> | null;
-    can<T extends E["type"]>(state: S, context: C, event: Extract<E, { type: T }>): boolean;
+        context: C,
+    ): Transition<S, S, Extract<E, { type: T }>, C> | null;
+    can<T extends E["type"]>(state: S, event: Extract<E, { type: T }>, context: C): boolean;
 }

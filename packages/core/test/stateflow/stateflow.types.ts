@@ -1,10 +1,10 @@
-import type { StateEventOf } from "@/stateflow";
+import type { StateEventOf, StateflowSchema } from "@/stateflow";
 
-export type TestState = "idle" | "running" | "done";
-
-export type TestContext = {
-    enabled: boolean;
-    attempts: number;
-};
-
-export type TestEvent = StateEventOf<"START"> | StateEventOf<"FINISH"> | StateEventOf<"RETRY"> | StateEventOf<"STOP">;
+export type TestSchema = StateflowSchema<
+    "idle" | "running" | "done",
+    StateEventOf<"START"> | StateEventOf<"FINISH"> | StateEventOf<"RETRY"> | StateEventOf<"STOP">,
+    {
+        enabled: boolean;
+        attempts: number;
+    }
+>;

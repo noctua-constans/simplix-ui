@@ -1,9 +1,9 @@
-import { _TransitionTableImpl } from "./_TransitionTableImpl";
+import { TransitionTableImpl } from "./transition-table.impl";
+import type { TransitionTable, TransitionTableOptions } from "./transition-table.types";
+import type { StateEventOf } from "../stateflow.types";
 
-import type { StateEventOf, TransitionTable, TransitionTableOptions } from "@/stateflow";
-
-export function createTransitionTable<S extends string, C, E extends StateEventOf>(
-    options: TransitionTableOptions<S, C, E>,
-): TransitionTable<S, C, E> {
-    return new _TransitionTableImpl(options);
+export function createTransitionTable<S extends string, E extends StateEventOf, C extends object>(
+    ...options: TransitionTableOptions<S, E, C>
+): TransitionTable<S, E, C> {
+    return new TransitionTableImpl(options);
 }

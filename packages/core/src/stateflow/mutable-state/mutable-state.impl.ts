@@ -1,15 +1,18 @@
-import type { MutableState, MutableStateOptions, Equality } from "@/stateflow";
+import type { Equality, MutableState, MutableStateOptions } from "./mutable-state.types";
+
 import type { Listener, Unsubscribe } from "@/types";
 
-export class _MutableStateImpl<T> implements MutableState<T> {
+export class MutableStateImpl<T> implements MutableState<T> {
     #internal: T;
-    readonly #listeners: Set<Listener>;
+    readonly #listeners: Set<Listener<T>>;
     readonly #equals: Equality<T>;
 
-    constructor(initial: T, options?: MutableStateOptions<T>) {
+    constructor(options: MutableStateOptions<T>) {
+        const [initial, equals] = options;
+
         this.#internal = initial;
         this.#listeners = new Set();
-        this.#equals = options?.equals ?? Object.is;
+        this.#equals = equals ?? Object.is;
     }
 
     get(): T {
@@ -21,7 +24,7 @@ export class _MutableStateImpl<T> implements MutableState<T> {
             return;
         }
         this.#internal = next;
-        this.#emit();
+        this.#emit(next);
     }
 
     update(updater: (prev: T) => T): void {
@@ -29,7 +32,7 @@ export class _MutableStateImpl<T> implements MutableState<T> {
         this.set(next);
     }
 
-    subscribe(listener: Listener): Unsubscribe {
+    subscribe(listener: Listener<T>): Unsubscribe {
         this.#listeners.add(listener);
 
         return () => {
@@ -37,9 +40,9 @@ export class _MutableStateImpl<T> implements MutableState<T> {
         };
     }
 
-    #emit(): void {
+    #emit(value: T): void {
         for (const listener of [...this.#listeners]) {
-            listener();
+            listener(value);
         }
     }
 }
