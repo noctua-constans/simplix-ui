@@ -6,7 +6,7 @@ import {
     type KeyboardBinder,
 } from "@/events";
 
-export class _KeyboardBinderImpl<TTarget extends EventTarget = EventTarget> implements KeyboardBinder<TTarget> {
+export class KeyboardBinderImpl<TTarget extends EventTarget = EventTarget> implements KeyboardBinder<TTarget> {
     readonly #listener: EventListener<TTarget>;
 
     constructor(options: BinderOptions<TTarget> = {}) {

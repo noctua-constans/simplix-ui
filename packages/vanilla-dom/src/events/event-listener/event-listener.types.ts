@@ -1,6 +1,7 @@
 export type DomEventOf<TEventMap extends object, TKey extends keyof TEventMap> = TEventMap[TKey] & Event;
 
 export type EventListenerDisposer = () => void;
+export const EVENT_LISTENER_NOOP: EventListenerDisposer = () => {};
 
 export interface EventListener<
     TTarget extends EventTarget = EventTarget,

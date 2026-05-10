@@ -6,7 +6,7 @@ import {
     type PointerBinder,
 } from "@/events";
 
-export class _PointerBinderImpl<TTarget extends EventTarget = EventTarget> implements PointerBinder<TTarget> {
+export class PointerBinderImpl<TTarget extends EventTarget = EventTarget> implements PointerBinder<TTarget> {
     readonly #listener: EventListener<TTarget>;
 
     constructor(options: BinderOptions<TTarget> = {}) {

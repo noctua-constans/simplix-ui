@@ -6,7 +6,7 @@ import {
     type FocusBinder,
 } from "@/events";
 
-export class _FocusBinderImpl<TTarget extends EventTarget = EventTarget> implements FocusBinder<TTarget> {
+export class FocusBinderImpl<TTarget extends EventTarget = EventTarget> implements FocusBinder<TTarget> {
     readonly #listener: EventListener<TTarget>;
 
     constructor(options: BinderOptions<TTarget> = {}) {
