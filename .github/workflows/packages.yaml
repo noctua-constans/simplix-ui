@@ -17,6 +17,7 @@
     changes:
       runs-on: ubuntu-latest
       outputs:
+        contracts: ${{ steps.filter.outputs.contracts }}
         core: ${{ steps.filter.outputs.core }}
         headless: ${{ steps.filter.outputs.headless }}
         vanilla-dom: ${{ steps.filter.outputs.vanilla-dom }}
@@ -27,6 +28,8 @@
           id: filter
           with:
             filters: |
+              contracts:
+                - 'packages/contracts/**'
               core:
                 - 'packages/core/**'
               headless:
@@ -40,6 +43,22 @@
                 - '.github/workflows/**'
                 - 'eslint.config.mts'
                 - '.prettierrc'
+
+    contracts:
+      needs: changes
+      if: needs.changes.outputs.contracts == 'true' || needs.changes.outputs.workspace == 'true'
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: pnpm/action-setup@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            cache: pnpm
+
+        - run: pnpm install --frozen-lockfile
+        - run: pnpm --filter @simplix/contracts typecheck
+        - run: pnpm --filter @simplix/contracts build
 
     core:
       needs: changes
