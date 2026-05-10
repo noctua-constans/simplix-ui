@@ -1,11 +1,7 @@
-import type { Readable, Subscribable, Writable } from "@/types";
+import type { Equality, Readable, Snapshot, Subscribable, Writable } from "@simplix/contracts";
 
-export type Equality<T> = (a: T, b: T) => boolean;
+export type MutableStateOptions<T extends object> = { initial: T; equals?: Equality<T> };
 
-export type MutableStateOptions<T> = {
-    equals?: Equality<T>;
-};
-
-export interface MutableState<T> extends Readable<T>, Writable<T>, Subscribable {
-    update(updater: (prev: T) => T): void;
+export interface MutableState<T extends object> extends Readable<Snapshot<T>>, Writable<T>, Subscribable<Snapshot<T>> {
+    update(updater: (prev: Snapshot<T>) => T): boolean;
 }

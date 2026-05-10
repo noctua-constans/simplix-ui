@@ -1,6 +1,6 @@
 import type { CSSProperties, ElementType, JSX } from "react";
 
-import { type GridItemProps, Layout } from "@/layouts";
+import { type GridItemProps, Box } from "@/layouts";
 
 export function GridItem<T extends ElementType = "div">(props: GridItemProps<T>): JSX.Element {
     const { as, style, ...rest } = props;
@@ -23,5 +23,5 @@ export function GridItem<T extends ElementType = "div">(props: GridItemProps<T>)
         ...style,
     };
 
-    return <Layout as={Tag} style={inlineStyles} {...others} />;
+    return <Box as={Tag} style={inlineStyles} {...others} />;
 }

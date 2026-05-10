@@ -1,11 +1,11 @@
 import type { CSSProperties, ElementType } from "react";
 
-import type { LayoutProps } from "@/layouts";
+import type { BoxProps } from "@/layouts";
 import type { PolymorphicComponentWithRef } from "@/types";
 
 export type FlexProps<T extends ElementType> = PolymorphicComponentWithRef<
     T,
-    LayoutProps<T> & {
+    BoxProps<T> & {
         inline?: boolean;
         direction?: CSSProperties["flexDirection"];
         alignItems?: CSSProperties["alignItems"];

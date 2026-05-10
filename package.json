@@ -2,10 +2,12 @@
     "name": "simplix-repo",
     "private": true,
     "workspaces": [
+        "packages/contracts",
         "packages/core",
         "packages/headless",
         "packages/dom",
-        "packages/react-dom"
+        "packages/react-dom",
+        "applications/playground"
     ],
     "scripts": {
         "build": "pnpm -r build",
@@ -20,18 +22,19 @@
     },
     "packageManager": "pnpm@10.25.0",
     "devDependencies": {
-        "@eslint/js": "^9.39.1",
-        "eslint": "^9.39.1",
+        "@eslint/js": "^9.39.4",
+        "@vitest/coverage-v8": "^4.1.5",
+        "eslint": "^9.39.4",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-import": "^2.32.0",
-        "eslint-plugin-prettier": "^5.5.4",
+        "eslint-plugin-prettier": "^5.5.5",
         "eslint-plugin-react": "^7.37.5",
         "globals": "^16.5.0",
         "jiti": "^2.6.1",
-        "prettier": "^3.7.4",
+        "prettier": "^3.8.3",
         "tsup": "^8.5.1",
-        "typescript": "^5.7",
-        "typescript-eslint": "^8.48.1",
-        "vitest": "^4.0.17"
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.59.1",
+        "vitest": "^4.1.5"
     }
 }

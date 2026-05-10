@@ -1,6 +1,6 @@
 import type { CSSProperties, ElementType, JSX } from "react";
 
-import { type GridRootProps, Layout } from "@/layouts";
+import { type GridRootProps, Box } from "@/layouts";
 
 export function GridRoot<T extends ElementType = "div">(props: GridRootProps<T>): JSX.Element {
     const { as, style, ...rest } = props;
@@ -50,5 +50,5 @@ export function GridRoot<T extends ElementType = "div">(props: GridRootProps<T>)
 
         ...style,
     };
-    return <Layout as={Tag} style={inlineStyles} {...others} />;
+    return <Box as={Tag} style={inlineStyles} {...others} />;
 }

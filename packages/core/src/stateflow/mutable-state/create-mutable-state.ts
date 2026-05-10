@@ -1,7 +1,6 @@
-import { _MutableStateImpl } from "./_MutableStateImpl";
+import { MutableStateImpl } from "./mutable-state.impl";
+import type { MutableState, MutableStateOptions } from "./mutable-state.types";
 
-import type { MutableStateOptions, MutableState } from "@/stateflow";
-
-export function createMutableState<T>(initial: T, options?: MutableStateOptions<T>): MutableState<T> {
-    return new _MutableStateImpl(initial, options);
+export function createMutableState<T extends object>(options: MutableStateOptions<T>): MutableState<T> {
+    return new MutableStateImpl(options);
 }

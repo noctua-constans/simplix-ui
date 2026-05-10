@@ -45,6 +45,7 @@
         "NOTICE"
     ],
     "dependencies": {
+        "@simplix/contracts": "workspace:^",
         "@simplix/core": "workspace:^"
     },
     "engines": {
@@ -55,10 +56,5 @@
         "build": "tsup",
         "typecheck": "tsc -p tsconfig.json --noEmit"
     },
-    "packageManager": "pnpm@10.25.0",
-    "devDependencies": {
-        "vite-tsconfig-paths": "^6.1.1",
-        "vitest": "^4.0.17",
-        "@vitest/coverage-v8": "^4.0.17"
-    }
+    "packageManager": "pnpm@10.25.0"
 }

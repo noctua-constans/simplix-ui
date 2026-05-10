@@ -1,0 +1,48 @@
+import {
+    type BinderOptions,
+    createEventListener,
+    type EventListener,
+    type EventListenerDisposer,
+    type FocusBinder,
+} from "@/events";
+
+export class FocusBinderImpl<TTarget extends EventTarget = EventTarget> implements FocusBinder<TTarget> {
+    readonly #listener: EventListener<TTarget>;
+
+    constructor(options: BinderOptions<TTarget> = {}) {
+        const { listener = createEventListener() } = options;
+        this.#listener = listener;
+    }
+
+    bindFocus(
+        target: TTarget,
+        listener: (event: FocusEvent) => void,
+        options?: AddEventListenerOptions,
+    ): EventListenerDisposer {
+        return this.#listener.add(target, "focus", listener, options);
+    }
+
+    bindBlur(
+        target: TTarget,
+        listener: (event: FocusEvent) => void,
+        options?: AddEventListenerOptions,
+    ): EventListenerDisposer {
+        return this.#listener.add(target, "blur", listener, options);
+    }
+
+    bindFocusIn(
+        target: TTarget,
+        listener: (event: FocusEvent) => void,
+        options?: AddEventListenerOptions,
+    ): EventListenerDisposer {
+        return this.#listener.add(target, "focusin", listener, options);
+    }
+
+    bindFocusOut(
+        target: TTarget,
+        listener: (event: FocusEvent) => void,
+        options?: AddEventListenerOptions,
+    ): EventListenerDisposer {
+        return this.#listener.add(target, "focusout", listener, options);
+    }
+}
