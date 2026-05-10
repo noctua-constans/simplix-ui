@@ -23,14 +23,17 @@ describe("createMutableState", () => {
         expect(listener).toHaveBeenCalledWith({ value: 1 });
     });
 
-    it("returns false and does not notify when the next value is the same reference", () => {
-        const initial = { value: Number.NaN };
-        const state = createMutableState({ initial });
+    it("returns false and does not notify when the next value is equal by custom equality", () => {
+        const state = createMutableState({
+            initial: { value: Number.NaN },
+            equals: (a, b) => Object.is(a.value, b.value),
+        });
+
         const listener = vi.fn();
 
         state.subscribe(listener);
 
-        const changed = state.set(initial);
+        const changed = state.set({ value: Number.NaN });
 
         expect(changed).toBe(false);
         expect(state.get()).toStrictEqual({ value: Number.NaN });
@@ -208,20 +211,29 @@ describe("createMutableState", () => {
         expect(listenerB).toHaveBeenCalledWith({ value: 2 });
     });
 
-    it("does not expose internal state reference through get", () => {
+    it("does not expose mutable internal state reference through get", () => {
         const state = createMutableState({ initial: { value: 1 } });
 
-        const snapshot = state.get() as { value: number };
-        snapshot.value = 999;
+        const snapshot = state.get();
+
+        expect(Object.isFrozen(snapshot)).toBe(true);
+
+        expect(() => {
+            (snapshot as { value: number }).value = 999;
+        }).toThrow();
 
         expect(state.get()).toStrictEqual({ value: 1 });
     });
 
-    it("does not expose internal state reference to listeners", () => {
+    it("does not expose mutable internal state reference to listeners", () => {
         const state = createMutableState({ initial: { value: 0 } });
 
         const listener = vi.fn((snapshot: { value: number }) => {
-            snapshot.value = 999;
+            expect(Object.isFrozen(snapshot)).toBe(true);
+
+            expect(() => {
+                snapshot.value = 999;
+            }).toThrow();
         });
 
         state.subscribe(listener);

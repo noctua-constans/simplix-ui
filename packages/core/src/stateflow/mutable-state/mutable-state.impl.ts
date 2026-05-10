@@ -38,10 +38,6 @@ export class MutableStateImpl<T extends object> implements MutableState<T> {
         const prev = this.#snapshot;
         const next = updater(prev);
 
-        if (Object.is(next, prev)) {
-            return false;
-        }
-
         return this.set(next);
     }
 
@@ -61,7 +57,7 @@ export class MutableStateImpl<T extends object> implements MutableState<T> {
     }
 
     #createSnapshot(value: T): Snapshot<T> {
-        return { ...value } as Snapshot<T>;
+        return Object.freeze({ ...value }) as Snapshot<T>;
     }
 
     #emit(): void {
