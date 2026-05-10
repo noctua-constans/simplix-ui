@@ -1,36 +1,36 @@
+import type { StylingDataset } from "@simplix/vanilla-dom";
 import type { InputHTMLAttributes, Ref } from "react";
+
+import type { ComponentWithStyles } from "@/types";
+
+type NativeProps = Pick<
+    InputHTMLAttributes<HTMLInputElement>,
+    | "id"
+    | "name"
+    | "value"
+    | "form"
+    | "required"
+    | "autoFocus"
+    | "tabIndex"
+    | "title"
+    | "role"
+    | "aria-label"
+    | "aria-labelledby"
+    | "aria-describedby"
+    | "aria-invalid"
+    | "aria-required"
+    | "readOnly"
+    | "onChange"
+> &
+    ComponentWithStyles;
 
 export type CheckboxProps = {
     ref?: Ref<HTMLInputElement>;
+
+    defaultChecked?: boolean;
+    disabled?: boolean;
     indeterminate?: boolean;
+
     onCheckedChange?: (checked: boolean) => void;
-} & Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    | "type"
-    | "placeholder"
-    | "minLength"
-    | "maxLength"
-    | "pattern"
-    | "size"
-    | "min"
-    | "max"
-    | "step"
-    | "accept"
-    | "multiple"
-    | "capture"
-    | "selectionStart"
-    | "selectionEnd"
-    | "selectionDirection"
-    | "src"
-    | "alt"
-    | "height"
-    | "width"
-    | "list"
-    | "onRateChange"
-    | "onVolumeChange"
-    | "onDurationChange"
-    | "onDurationChangeCapture"
-    | "onRateChangeCapture"
-    | "onVolumeChangeCapture"
-    | "onChangeCapture"
->;
+} & NativeProps &
+    StylingDataset;
