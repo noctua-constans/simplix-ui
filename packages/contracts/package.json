@@ -1,17 +1,16 @@
 {
     "name": "@simplix/contracts",
     "version": "0.1.1",
-    "description": "Low-level engines for state, transitions, and reusable runtime primitives.",
+    "description": "Shared TypeScript contracts for Simplix runtime primitives and integration APIs.",
     "keywords": [
-        "state-machine",
-        "finite-state-machine",
-        "state",
-        "transitions",
-        "transition-table",
-        "runtime",
+        "contracts",
+        "interfaces",
+        "types",
         "primitives",
+        "lifecycle",
         "observable",
         "subscriptions",
+        "runtime",
         "typescript"
     ],
     "license": "Apache-2.0",

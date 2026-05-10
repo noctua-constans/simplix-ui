@@ -1,17 +1,16 @@
 {
     "name": "@simplix/core",
     "version": "0.2.2",
-    "description": "Low-level engines for state, transitions, and reusable runtime primitives.",
+    "description": "Core Simplix runtime primitives for identity, lifecycle, stateflow, and transition-driven behavior.",
     "keywords": [
+        "identity",
+        "lifecycle",
+        "stateflow",
         "state-machine",
-        "finite-state-machine",
-        "state",
         "transitions",
         "transition-table",
         "runtime",
         "primitives",
-        "observable",
-        "subscriptions",
         "typescript"
     ],
     "license": "Apache-2.0",
