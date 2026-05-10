@@ -1,15 +1,18 @@
 import { createStatefulMachine, type StatefulMachine } from "@simplix/core";
 
-import { CheckboxTransitionTable } from "./checkbox.transition-table";
-import type { CheckboxSchema, CheckboxStateOptions } from "./checkbox.types";
+import type { CheckboxStateflowSchema, CheckboxStateOptions } from "./checkbox.types";
 
 export function createCheckboxState(
     options: CheckboxStateOptions,
-): StatefulMachine<CheckboxSchema["STATE"], CheckboxSchema["EVENT"], CheckboxSchema["CONTEXT"]> {
-    const { initialState, context } = options;
+): StatefulMachine<
+    CheckboxStateflowSchema["STATE"],
+    CheckboxStateflowSchema["EVENT"],
+    CheckboxStateflowSchema["CONTEXT"]
+> {
+    const { initial, context, table } = options;
     return createStatefulMachine({
-        initialState,
+        initial,
         context,
-        table: CheckboxTransitionTable,
+        table,
     });
 }

@@ -45,6 +45,7 @@
         "NOTICE"
     ],
     "dependencies": {
+        "@simplix/contracts": "workspace:^",
         "@simplix/core": "workspace:^"
     },
     "engines": {

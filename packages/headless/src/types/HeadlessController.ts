@@ -1,3 +1,4 @@
-import type { Readable, Subscribable } from "@simplix/core";
+import type { Destroyable, Readable, Snapshot, Subscribable } from "@simplix/contracts";
 
-export interface HeadlessController<TSnapshot extends object> extends Readable<TSnapshot>, Subscribable<TSnapshot> {}
+export interface HeadlessController<T extends object>
+    extends Readable<Snapshot<T>>, Subscribable<Snapshot<T>>, Destroyable {}

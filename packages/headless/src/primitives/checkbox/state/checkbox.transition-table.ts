@@ -1,11 +1,11 @@
 import { createTransitionTable, type TransitionTable } from "@simplix/core";
 
-import type { CheckboxSchema } from "./checkbox.types";
+import type { CheckboxStateflowSchema } from "./checkbox.types";
 
-export const CheckboxTransitionTable: TransitionTable<
-    CheckboxSchema["STATE"],
-    CheckboxSchema["EVENT"],
-    CheckboxSchema["CONTEXT"]
+export const CHECKBOX_TRANSITION_TABLE: TransitionTable<
+    CheckboxStateflowSchema["STATE"],
+    CheckboxStateflowSchema["EVENT"],
+    CheckboxStateflowSchema["CONTEXT"]
 > = createTransitionTable({
     checked: {
         UNCHECK: {
@@ -28,6 +28,7 @@ export const CheckboxTransitionTable: TransitionTable<
             reduce: ({ context }) => ({ ...context, disabled: true }),
         },
     },
+
     unchecked: {
         CHECK: {
             target: "checked",

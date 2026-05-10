@@ -1,6 +1,6 @@
-import type { StateEventOf, StateflowSchema } from "@simplix/core";
+import type { StateEventOf, StateflowSchema, StatefulMachineOptions } from "@simplix/core";
 
-export type CheckboxSchema = StateflowSchema<
+export type CheckboxStateflowSchema = StateflowSchema<
     "checked" | "unchecked",
     | StateEventOf<"CHECK">
     | StateEventOf<"UNCHECK">
@@ -12,7 +12,8 @@ export type CheckboxSchema = StateflowSchema<
     }
 >;
 
-export type CheckboxStateOptions = {
-    initialState: CheckboxSchema["STATE"];
-    context: CheckboxSchema["CONTEXT"];
-};
+export type CheckboxStateOptions = StatefulMachineOptions<
+    CheckboxStateflowSchema["STATE"],
+    CheckboxStateflowSchema["EVENT"],
+    CheckboxStateflowSchema["CONTEXT"]
+>;
