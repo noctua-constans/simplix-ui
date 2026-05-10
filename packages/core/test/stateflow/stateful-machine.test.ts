@@ -14,7 +14,7 @@ function createNullTable(): TransitionTable<TestSchema["STATE"], TestSchema["EVE
 describe("createStatefulMachine", () => {
     it("exposes the initial state and context", () => {
         const machine = createStatefulMachine<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]>({
-            initialState: "idle",
+            initial: "idle",
             context: { enabled: true, attempts: 1 },
             table: createNullTable(),
         });
@@ -26,8 +26,8 @@ describe("createStatefulMachine", () => {
         const resolveSpy = vi.fn();
         const listener = vi.fn();
         const table: TransitionTable<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]> = {
-            resolve: (state, context, event) => {
-                resolveSpy(state, context, event);
+            resolve: (state, event, context) => {
+                resolveSpy(state, event, context);
 
                 return {
                     target: "running",
@@ -37,7 +37,7 @@ describe("createStatefulMachine", () => {
             can: () => false,
         };
         const machine = createStatefulMachine<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]>({
-            initialState: "idle",
+            initial: "idle",
             context: { enabled: true, attempts: 1 },
             table,
         });
@@ -59,7 +59,7 @@ describe("createStatefulMachine", () => {
             can: () => true,
         };
         const machine = createStatefulMachine<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]>({
-            initialState: "idle",
+            initial: "idle",
             context,
             table,
         });
@@ -73,7 +73,7 @@ describe("createStatefulMachine", () => {
     it("does nothing when the transition table returns no transition", () => {
         const listener = vi.fn();
         const machine = createStatefulMachine<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]>({
-            initialState: "idle",
+            initial: "idle",
             context: { enabled: true, attempts: 1 },
             table: createNullTable(),
         });
@@ -96,7 +96,7 @@ describe("createStatefulMachine", () => {
             can: () => true,
         };
         const machine = createStatefulMachine<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]>({
-            initialState: "idle",
+            initial: "idle",
             context,
             table,
         });
@@ -117,7 +117,7 @@ describe("createStatefulMachine", () => {
             can: (state, event, context) => canSpy(state, event, context),
         };
         const machine = createStatefulMachine<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]>({
-            initialState: "running",
+            initial: "running",
             context: { enabled: false, attempts: 3 },
             table,
         });
@@ -139,7 +139,7 @@ describe("createStatefulMachine", () => {
             can: (state, event, context) => canSpy(state, event, context),
         };
         const machine = createStatefulMachine<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]>({
-            initialState: "idle",
+            initial: "idle",
             context: { enabled: true, attempts: 0 },
             table,
         });
@@ -159,7 +159,7 @@ describe("createStatefulMachine", () => {
             can: () => true,
         };
         const machine = createStatefulMachine<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]>({
-            initialState: "idle",
+            initial: "idle",
             context: { enabled: true, attempts: 0 },
             table,
         });
@@ -171,5 +171,27 @@ describe("createStatefulMachine", () => {
 
         expect(machine.get()).toEqual({ state: "idle", context: { enabled: true, attempts: 1 } });
         expect(listener).not.toHaveBeenCalled();
+    });
+
+    it("keeps the current state when the resolved transition has no target", () => {
+        const table: TransitionTable<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]> = {
+            resolve: () => ({
+                reduce: ({ context }) => ({ ...context, attempts: context.attempts + 1 }),
+            }),
+            can: () => true,
+        };
+
+        const machine = createStatefulMachine<TestSchema["STATE"], TestSchema["EVENT"], TestSchema["CONTEXT"]>({
+            initial: "idle",
+            context: { enabled: true, attempts: 1 },
+            table,
+        });
+
+        machine.send({ type: "RETRY" });
+
+        expect(machine.get()).toEqual({
+            state: "idle",
+            context: { enabled: true, attempts: 2 },
+        });
     });
 });
