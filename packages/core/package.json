@@ -44,6 +44,9 @@
         "LICENSE",
         "NOTICE"
     ],
+    "dependencies": {
+        "@simplix/contracts": "workspace:^"
+    },
     "engines": {
         "node": ">=20",
         "pnpm": ">=10"

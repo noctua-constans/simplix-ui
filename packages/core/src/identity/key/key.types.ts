@@ -1,7 +1,7 @@
+import type { Resetable } from "@simplix/contracts";
+
 import type { Cursor } from "../identity.types";
 import type { Sequence } from "../sequence";
-
-import type { Resetable } from "@/types";
 
 export type KeyOptions = {
     prefix?: string;

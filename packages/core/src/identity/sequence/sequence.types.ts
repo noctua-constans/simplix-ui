@@ -1,5 +1,6 @@
+import type { Resetable } from "@simplix/contracts";
+
 import type { Cursor } from "@/identity";
-import type { Resetable } from "@/types";
 
 export type SequenceOptions = {
     from?: number;

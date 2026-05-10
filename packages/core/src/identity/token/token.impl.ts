@@ -8,8 +8,8 @@ export class TokenImpl<TKey> implements Token<TKey> {
     readonly #mapKeys: Iterable<TKey> | undefined;
     readonly #mapSize: number;
 
-    #token: string | null = null;
-    #map: Map<TKey, string> | null = null;
+    #token: string | null;
+    #map: Map<TKey, string> | null;
 
     constructor(options: TokenOptions<TKey> = {}) {
         const { length = 12, charset = DEFAULT_TOKEN_CHARSET, map = {} } = options;
@@ -21,6 +21,9 @@ export class TokenImpl<TKey> implements Token<TKey> {
         this.#mapKey = key;
         this.#mapKeys = keys;
         this.#mapSize = size;
+
+        this.#token = null;
+        this.#map = null;
     }
 
     get(): string {

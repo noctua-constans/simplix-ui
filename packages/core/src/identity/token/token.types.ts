@@ -1,4 +1,4 @@
-import type { Readable } from "@/types";
+import type { Readable } from "@simplix/contracts";
 
 export const DEFAULT_TOKEN_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" as const;
 
