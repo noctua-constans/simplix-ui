@@ -1,48 +1,74 @@
-import type { Equality, MutableState, MutableStateOptions } from "./mutable-state.types";
+import type { Equality, Listener, Snapshot, Unsubscribe } from "@simplix/contracts";
 
-import type { Listener, Unsubscribe } from "@/types";
+import type { MutableState, MutableStateOptions } from "./mutable-state.types";
 
-export class MutableStateImpl<T> implements MutableState<T> {
+export class MutableStateImpl<T extends object> implements MutableState<T> {
     #internal: T;
-    readonly #listeners: Set<Listener<T>>;
+    #snapshot: Snapshot<T>;
+
+    readonly #listeners: Set<Listener<Snapshot<T>>>;
     readonly #equals: Equality<T>;
 
     constructor(options: MutableStateOptions<T>) {
-        const [initial, equals] = options;
+        const { initial, equals } = options;
 
-        this.#internal = initial;
+        this.#internal = { ...initial };
+        this.#snapshot = this.#createSnapshot(this.#internal);
         this.#listeners = new Set();
         this.#equals = equals ?? Object.is;
     }
 
-    get(): T {
-        return this.#internal;
+    get(): Snapshot<T> {
+        return this.#snapshot;
     }
 
-    set(next: T): void {
+    set(next: T): boolean {
         if (this.#equals(this.#internal, next)) {
-            return;
+            return false;
         }
-        this.#internal = next;
-        this.#emit(next);
+
+        this.#internal = { ...next };
+        this.#snapshot = this.#createSnapshot(this.#internal);
+        this.#emit();
+
+        return true;
     }
 
-    update(updater: (prev: T) => T): void {
-        const next = updater(this.#internal);
-        this.set(next);
+    update(updater: (prev: Snapshot<T>) => T): boolean {
+        const prev = this.#snapshot;
+        const next = updater(prev);
+
+        if (Object.is(next, prev)) {
+            return false;
+        }
+
+        return this.set(next);
     }
 
-    subscribe(listener: Listener<T>): Unsubscribe {
+    subscribe(listener: Listener<Snapshot<T>>): Unsubscribe {
         this.#listeners.add(listener);
 
+        let subscribed = true;
+
         return () => {
+            if (!subscribed) {
+                return;
+            }
+
+            subscribed = false;
             this.#listeners.delete(listener);
         };
     }
 
-    #emit(value: T): void {
+    #createSnapshot(value: T): Snapshot<T> {
+        return { ...value } as Snapshot<T>;
+    }
+
+    #emit(): void {
+        const snapshot = this.#snapshot;
+
         for (const listener of [...this.#listeners]) {
-            listener(value);
+            listener(snapshot);
         }
     }
 }
