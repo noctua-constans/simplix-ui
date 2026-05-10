@@ -6,7 +6,8 @@
         "packages/core",
         "packages/headless",
         "packages/dom",
-        "packages/react-dom"
+        "packages/react-dom",
+        "applications/playground"
     ],
     "scripts": {
         "build": "pnpm -r build",
