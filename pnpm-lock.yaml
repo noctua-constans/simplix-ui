@@ -88,16 +88,28 @@ importers:
         specifier: ^8.0.10
         version: 8.0.10(@types/node@24.12.2)(esbuild@0.27.7)(jiti@2.6.1)
 
-  packages/core: {}
+  packages/contracts: {}
+
+  packages/core:
+    dependencies:
+      '@simplix/contracts':
+        specifier: workspace:^
+        version: link:../contracts
 
   packages/headless:
     dependencies:
+      '@simplix/contracts':
+        specifier: workspace:^
+        version: link:../contracts
       '@simplix/core':
         specifier: workspace:^
         version: link:../core
 
   packages/react-dom:
     dependencies:
+      '@simplix/contracts':
+        specifier: workspace:^
+        version: link:../contracts
       '@simplix/headless':
         specifier: workspace:^
         version: link:../headless

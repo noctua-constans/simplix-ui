@@ -1,3 +1,3 @@
 export interface Writable<T> {
-    set(next: T): void;
+    set(next: T): boolean;
 }

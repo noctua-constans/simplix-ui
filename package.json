@@ -2,6 +2,7 @@
     "name": "simplix-repo",
     "private": true,
     "workspaces": [
+        "packages/contracts",
         "packages/core",
         "packages/headless",
         "packages/dom",

@@ -1,4 +1,5 @@
 packages:
+  - packages/contracts
   - packages/core
   - packages/headless
   - packages/react-dom
